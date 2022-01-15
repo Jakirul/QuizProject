@@ -1,0 +1,32 @@
+services:
+  server:
+    container_name: debug_dev_api
+    ports: 
+      - 3001:3001
+    environment: 
+      - DB_NAME=db
+      - DB_CONNECTION=mongodb://user:pass@db:27017
+      - NODE_ENV=development
+    depends_on:
+      - db
+    command: bash -c "npm install && npm run dev"
+  socket:
+    container_name: socket_api
+    ports:
+      - 5001:5001
+    environment:
+      - NODE_ENV=development
+    command: bash -c "npm install && npm run dev"
+
+  db:
+    container_name: debug_dev_db
+    volumes:
+      - "debug_dev_db:/var/lib/mongodb/data"
+      - "./server/db/seedDev.js:/docker-entrypoint-initdb.d/seedDev.js:ro"
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_DATABASE=quiz_db
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    command: --quiet
+volumes:
+  debug_dev_db:
