@@ -4,14 +4,14 @@ import { NavBar } from "../../components";
 
 function Home() {
   return (
-    <>
+    <div>
       <NavBar />
       <main>
         <button>New Quiz</button>
         <button>Join Game</button>
         <button>LeaderBoard</button>
       </main>
-    </>
+    </div>
   );
 }
 

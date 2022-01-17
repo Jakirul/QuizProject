@@ -6,10 +6,10 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/LoginRegister" element={<LoginRegister />} />
-        <Route path="/QuizPage" element={<QuizPage />} />
-        <Route path="/LeaderBoard" element={<LeaderBoard />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/LoginRegister" element={<LoginRegister />} />
+        <Route exact path="/QuizPage" element={<QuizPage />} />
+        <Route exact path="/LeaderBoard" element={<LeaderBoard />} />
       </Routes>
     </div>
   );
