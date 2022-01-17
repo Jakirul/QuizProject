@@ -5,10 +5,8 @@ const init = async () => {
   const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
  
   let dbName = process.env.NODE_ENV == "test" ? "quiz_dbtest": "quiz_db";
-  console.log("DB NAME = ", dbName)
   try {
       let client = await mongoClient.connect();
-      console.log(`Connected to database!`);
       return client.db(dbName);
   } catch (error) {
       console.log(error);

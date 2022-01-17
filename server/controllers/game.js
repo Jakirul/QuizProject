@@ -84,7 +84,7 @@ async function logScore(req, res) {
     try{
         const {username, score} = req.params
         const result = await Game.logScore(username, score)
-        res.status(200)
+        res.status(200).json(result)
     } catch (e) {
         res.status(500).send({e: "Cannot log the score!"})
     }

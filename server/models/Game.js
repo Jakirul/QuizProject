@@ -77,10 +77,10 @@ class Game {
         });
     }
 
-    static logScore(username, score){
+    static logScore(username, score) {
         return new Promise(async (resolve, reject) => {
-            try{
-                if(score>0){
+            try {
+                if (score > 0) {
                     Game.scoreAdder(username, score)
                 }
                 resolve("score added")
@@ -169,11 +169,12 @@ class AllQuestions {
         this.id = data._id
         this.questions = data.questions.results.map((list) => ({
             category: list.category,
-            difficulty: list.difficulty,
             question: list.question,
-            allAnswers: list.incorrect_answers.concat([list.correct_answer]).sort(() => Math.random() - 0.5)
+            allAnswers: list.incorrect_answers.concat([list.correct_answer]),
+            correctAns: list.correct_answer,
+            difficulty: list.difficulty,
+
         }))
     }
 }
-
 module.exports = { Game, AllQuestions };
