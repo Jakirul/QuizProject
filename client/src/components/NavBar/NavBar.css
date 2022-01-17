@@ -1,5 +1,39 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  border: solid 1px red;
+}
+
 .nav-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 100px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: green;
+  font-size: 15px;
+  color: white;
+}
+
+.Home-wrap,
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-icon {
+  color: white;
+  margin-left: -8px;
+}
+
+.log-reg {
+}
+span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+span > * {
+  padding: 1px;
 }
