@@ -46,10 +46,15 @@ export const incrementPlayer = (incrementPlayer) => ({
 });
 
 export const login = (token) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 082441cad8695ae38d3e00f59b243be4778cbe15
   return async (dispatch) => {
     try {
-      const user = jwt_decode(token);
+      const user = await jwt_decode(token);
       localStorage.setItem("token", token);
+<<<<<<< HEAD
       
      
       dispatch({
@@ -65,9 +70,21 @@ export const login = (token) => {
         payload: err,
       })
       
+=======
+      dispatch({
+        type: "LOG_IN",
+        payload: user,
+      });
+    } catch (err) {
+      console.warn(`${err}`);
+      dispatch({
+        type: "ERROR",
+        payload: err,
+      });
+>>>>>>> 082441cad8695ae38d3e00f59b243be4778cbe15
     }
-  }
- 
+  };
+
 };
 
 export const requestLogin = (userData) => {

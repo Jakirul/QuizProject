@@ -18,11 +18,11 @@ function Login() {
   return (
     <form id="login-form" onSubmit={handleSubmit}>
       <div>
-        <label>Email address</label>
+        <label>Username</label>
         <input
           required
-          type="email"
-          name="email"
+          type="text"
+          name="username"
           aria-describedby="emailHelp"
         ></input>
       </div>
@@ -30,7 +30,7 @@ function Login() {
         <label>Password</label>
         <input required type="password" name="password"></input>
       </div>
-      <button type="submit">Login</button>
+      <input type="submit" />
     </form>
   );
 }
