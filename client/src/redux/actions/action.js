@@ -46,21 +46,25 @@ export const incrementPlayer = (incrementPlayer) => ({
 });
 
 export const login = (token) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       const user = jwt_decode(token);
       localStorage.setItem("token", token);
       
-      return {
+     
+      dispatch({
         type: "LOG_IN",
         payload: user,
-      };
+      })
+      
     } catch (err) {
       console.warn(`${err}`);
-      return {
+      
+      dispatch({
         type: "ERROR",
         payload: err,
-      };
+      })
+      
     }
   }
  

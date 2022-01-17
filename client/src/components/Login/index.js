@@ -1,8 +1,22 @@
 import React from "react";
+import { requestLogin } from "../../redux/actions/action";
+import { useDispatch } from "react-redux";
 
 function Login() {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    dispatch(
+      requestLogin({
+        username: form.username.value,
+        password: form.password.value,
+      })
+    );
+  };
   return (
-    <form id="login-form">
+    <form id="login-form" onSubmit={handleSubmit}>
       <div>
         <label>Email address</label>
         <input
