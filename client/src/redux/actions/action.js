@@ -46,6 +46,7 @@ export const incrementPlayer = (incrementPlayer) => ({
 });
 
 export const login = (token) => {
+
   return async (dispatch) => {
     try {
       const user = await jwt_decode(token);
@@ -62,6 +63,7 @@ export const login = (token) => {
       });
     }
   };
+
 };
 
 export const requestLogin = (userData) => {
@@ -74,8 +76,9 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-      console.log("data is", data);
+      console.log(data)
       if (!data.success) {
+        console.log("error ")
         dispatch({
           type: "ERROR",
           payload: "Login not authorised",
