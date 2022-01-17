@@ -3,4 +3,4 @@ export { default as NavBar } from "./NavBar";
 export { default as QuizGame } from "./QuizGame";
 export { default as QuizResults } from "./QuizResults";
 export { default as QuizSelect } from "./QuizSelect";
-export { default as QuizWaiting } from "./QuizWaiting";
+export { default as Register } from "./Register";
