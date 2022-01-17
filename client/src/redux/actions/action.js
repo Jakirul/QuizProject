@@ -45,21 +45,25 @@ export const incrementPlayer = (incrementPlayer) => ({
   payload: incrementPlayer,
 });
 
-export const login = async (token) => {
-  try {
-    const user = jwt_decode(token);
-    localStorage.setItem("token", token);
-    return {
-      type: "LOG_IN",
-      payload: user,
-    };
-  } catch (err) {
-    console.warn(`${err}`);
-    return {
-      type: "ERROR",
-      payload: err,
-    };
+export const login = (token) => {
+  return async () => {
+    try {
+      const user = jwt_decode(token);
+      localStorage.setItem("token", token);
+      
+      return {
+        type: "LOG_IN",
+        payload: user,
+      };
+    } catch (err) {
+      console.warn(`${err}`);
+      return {
+        type: "ERROR",
+        payload: err,
+      };
+    }
   }
+ 
 };
 
 export const requestLogin = (userData) => {
@@ -72,8 +76,9 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-      console.log("data is", data);
+      console.log(data)
       if (!data.success) {
+        console.log("error ")
         dispatch({
           type: "ERROR",
           payload: "Login not authorised",

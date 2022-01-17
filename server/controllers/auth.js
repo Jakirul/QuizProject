@@ -13,7 +13,7 @@ async function register(req, res){
         await User.create({...req.body, password: hashed})
         res.status(201).json({msg: 'User created'})
     } catch (err) {
-        res.status(500).json({err});
+        res.status(500).json({err: "Error registering user"});
     }
 }
 
@@ -38,7 +38,7 @@ async function login (req, res){
         }
     } catch (err) {
         console.log(err);
-        res.status(401).json({ err });
+        res.status(401).json({ err: "Error logging in" });
     }
 }
 
