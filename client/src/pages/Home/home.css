@@ -1,18 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
 .button {
   padding: 50px;
   display: flex;
   margin-top: 40px;
-  text-align: center;
-  align-items: center;
-  /* justify-content: center; */
+  width: 200px;
+  border-radius: 20px;
 }
 
 .button-stack {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
-.welcome {
+#welcome {
   text-align: center;
   margin-top: 40px;
+  background-color: green;
 }
