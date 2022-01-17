@@ -1,15 +1,23 @@
 import React from "react";
 import "./home.css";
 import { NavBar } from "../../components";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <div>
       <NavBar />
-      <main>
-        <button>New Quiz</button>
-        <button>Join Game</button>
-        <button>LeaderBoard</button>
+      <div className="welcome">Welcome to inQUIZitive!</div>
+      <main className="button-stack">
+        <Link to="/QuizPage">
+          <button className="button">New Quiz</button>
+        </Link>
+        <Link to="/QuizWaiting">
+          <button className="button">Join Game</button>
+        </Link>
+        <Link to="LeaderBoard">
+          <button className="button">LeaderBoard</button>
+        </Link>
       </main>
     </div>
   );

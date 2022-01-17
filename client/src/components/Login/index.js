@@ -16,9 +16,7 @@ function Login() {
         <label>Password</label>
         <input required type="password" name="password"></input>
       </div>
-      <button type="submit" class="btn btn-secondary">
-        Login
-      </button>
+      <button type="submit">Login</button>
     </form>
   );
 }

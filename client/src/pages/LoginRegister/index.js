@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Login } from "../../components";
+import { Login, Register, NavBar } from "../../components";
 
 function LoginRegister() {
+  function displayRegister() {}
   const [showRegisterForm, setRegisterForm] = useState(false);
   return (
-    <div class="login-register">
-      <Login />
-      <button onClick={displayRegister}>Haven't got an account?</button>
-    </div>
+    <>
+      <NavBar />
+      <div className="login-register">
+        {!showRegisterForm && <Login />}
+        {showRegisterForm && <Register />}
+        <button
+          onClick={() =>
+            setRegisterForm((showRegisterForm) => !showRegisterForm)
+          }
+        >
+          Haven't got an account?
+        </button>
+      </div>
+    </>
   );
 }
 
