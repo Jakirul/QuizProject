@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
+
 async function register(req, res) {
   try {
     const salt = await bcrypt.genSalt();
@@ -14,6 +15,7 @@ async function register(req, res) {
   } catch (err) {
     res.status(500).json({ err });
   }
+
 }
 
 async function login(req, res) {
@@ -30,6 +32,7 @@ async function login(req, res) {
         if (err) {
           throw new Error("Error in token generation");
         }
+
         res.status(200).json({
           success: true,
           token: "Bearer " + token,
@@ -38,6 +41,7 @@ async function login(req, res) {
       jwt.sign(payload, process.env.SECRET, { expiresIn: 300000 }, sendToken);
     } else {
       throw new Error("User could not be authenticated");
+
     }
   } catch (err) {
     console.log(err);

@@ -74,8 +74,9 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-      console.log("data is", data);
+      console.log(data);
       if (!data.success) {
+        console.log("error ");
         dispatch({
           type: "ERROR",
           payload: "Login not authorised",
