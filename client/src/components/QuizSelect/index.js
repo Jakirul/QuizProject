@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./QuizSelect.css";
 import { useNavigate } from "react-router-dom";
-import { NavBar } from "./";
+import NavBar from "../NavBar"
 
 function QuizSelect() {
   const [categorySpace, setCategorySpace] = useState({});
+  const [currVal, setCurrVal] = useState(10)
   const navigate = useNavigate()
 
   const fetchCategories = async () => {
@@ -55,6 +56,7 @@ function QuizSelect() {
 
   return (
     <div className="QuizSelection">
+      <NavBar />
       <h1>Select New Quiz</h1>
 
       <form onSubmit={setGame}>
@@ -71,7 +73,9 @@ function QuizSelect() {
         </select>
 
         <div>Number of Questions (1-20)</div>
-        <input name="range" type="range" min="0" max="20" />
+        <input type="range" name="range" value={currVal} min="1" max="20" onInput={(e) => setCurrVal(e.target.value)} />
+        <label htmlFor="range">{currVal}</label>
+
         <input type="submit" />
       </form>
     </div>

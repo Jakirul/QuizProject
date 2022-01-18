@@ -1,10 +1,10 @@
 
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { NavBar } from "../../components";
 import './QuizJoin.css'
 
 const JoinQuiz = () => {
-    const history = useNavigate();
     const [result, setResult] = useState()
     
     const joinRoom = async (e) => {
@@ -21,7 +21,7 @@ const JoinQuiz = () => {
     }
     return (
         <div >
-            <button className="back" onClick={() => history(-1)}>Go back</button>
+            <NavBar />
 
             <div className="inner-joinquiz">
                 <h1>Join Existing Lobby</h1>

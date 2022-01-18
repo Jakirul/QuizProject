@@ -1,4 +1,5 @@
 const httpServer = require("http").createServer();
+require('events').EventEmitter.prototype._maxListeners = 100;
 
 const io = require('socket.io')(httpServer, {
     cors: {
@@ -17,7 +18,7 @@ io.on("connection", socket => {
         playerIdList.push({ room: roomId, id: socket.id, username: socket.id, userReady: false });
 
         io.to(roomId).emit('lobby-players', playerIdList.filter(game => game.room === roomId))
-        
+
         socket.on('username', (nickname) => {
             playerIdList.find(s => s.id === socket.id).username = nickname
             io.in(roomId).emit('lobby-players', playerIdList.filter(game => game.room === roomId))
@@ -37,21 +38,22 @@ io.on("connection", socket => {
                 io.to(roomId).emit('lobby-players', playerIdList.filter(game => game.room === roomId))
             }
         });
-        
+
         let playerCounter = 0;
-        
+
         socket.on('timer', () => {
             playerCounter++
-            if(playerCounter===playerIdList.length){
+            
+            if (playerCounter >= playerIdList.length) {
                 let timer = 10;
-                const countdown = setInterval(function(){
+                const countdown = setInterval(function () {
                     io.to(roomId).emit('countdown', timer)
                     timer--
-                    socket.on('reset', ()=>{
+                    socket.on('reset', () => {
                         clearInterval(countdown)
                         playerCounter = 0
                     })
-                    if(timer<0){
+                    if (timer < 0) {
                         io.to(roomId).emit('timeUp')
                         clearInterval(countdown)
                         playerCounter = 0
