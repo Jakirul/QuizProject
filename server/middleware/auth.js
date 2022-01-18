@@ -9,6 +9,7 @@ function verifyToken(req, res, next){
             if(err){
                 res.status(403).json({ err: 'Invalid token' })
             } else {
+                res.status(200)
                 next();
             }
         })

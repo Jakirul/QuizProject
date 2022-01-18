@@ -28,8 +28,8 @@ class User {
         let result = await db
           .collection("users")
           .insertOne({ username: username, password_digest: password });
-        let newUser = new User(result);
-        res(newUser);
+        // let newUser = new User(result);
+        res(result);
       } catch (err) {
         rej(`Error creating user: ${err}`);
       }
@@ -42,7 +42,7 @@ class User {
         const db = await init();
         const result = await db
           .collection("users")
-          .find({ username })
+          .find({ username: username })
           .toArray();
         const user = new User(result[0]);
         res(user);
