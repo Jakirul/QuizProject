@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { incrementPlayer, readyPlayers, socketConnections, unreadyPlayers } from '../../redux/actions/action.js'
+import NavBar from "../../components/NavBar"
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from "react-share";
 
 const url = "http://localhost:5001"
@@ -100,6 +101,7 @@ function QuizWaiting() {
 
     return (
         <div>
+            <NavBar />
 
             {
                 !result ?

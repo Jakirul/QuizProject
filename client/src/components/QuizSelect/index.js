@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./QuizSelect.css";
 import { useNavigate } from "react-router-dom";
+
 import { NavBar } from "../../components";
 
 function QuizSelect() {
@@ -72,7 +73,9 @@ function QuizSelect() {
         </select>
 
         <div>Number of Questions (1-20)</div>
-        <input name="range" type="range" min="0" max="20" />
+        <input type="range" name="range" value={currVal} min="1" max="20" onInput={(e) => setCurrVal(e.target.value)} />
+        <label htmlFor="range">{currVal}</label>
+
         <input type="submit" />
       </form>
     </div>

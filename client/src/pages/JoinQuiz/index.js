@@ -10,6 +10,7 @@ const JoinQuiz = () => {
   const joinRoom = async (e) => {
     e.preventDefault();
 
+
     const findLobby = await fetch(
       `http://localhost:3001/exists/${e.target.room.value}`
     );
@@ -19,6 +20,7 @@ const JoinQuiz = () => {
     } else {
       window.location.href = `http://localhost:3000/room/${e.target.room.value}`;
     }
+
   };
   return (
     <div>
@@ -26,6 +28,7 @@ const JoinQuiz = () => {
       <button className="back" onClick={() => history(-1)}>
         Go back
       </button>
+
 
       <div className="inner-joinquiz">
         <h1>Join Existing Lobby</h1>
