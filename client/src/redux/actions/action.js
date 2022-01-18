@@ -62,7 +62,6 @@ export const login = (token) => {
       });
     }
   };
-
 };
 
 export const requestLogin = (userData) => {
@@ -75,9 +74,9 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-      console.log(data)
+      console.log(data);
       if (!data.success) {
-        console.log("error ")
+        console.log("error ");
         dispatch({
           type: "ERROR",
           payload: "Login not authorised",
