@@ -3,8 +3,8 @@ import {
   Home,
   LeaderBoard,
   LoginRegister,
-  QuizPage,
   QuizWaiting,
+  QuizJoin
 } from "./pages";
 
 import {
@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/LoginRegister" element={<LoginRegister />} />
+        <Route exact path="/join" element={<QuizJoin />} />
         <Route exact path="/QuizPage" element={<QuizSelect />} />
         <Route exact path="/results/:id" element={<QuizResults />} />
         <Route exact path="/quiz/:id" element={<QuizGame />} />
