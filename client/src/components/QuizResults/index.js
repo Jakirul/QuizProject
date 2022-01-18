@@ -1,7 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 function QuizResults() {
-  return <div></div>;
+  const [results, setResults] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  async function fetchResults() {
+    const response = await fetch(`http://localhost:3001/results/${id}`);
+    const initialData = await response.json();
+    const data = initialData.sort(function (a, b) {
+      return b.scoreKeeper - a.scoreKeeper;
+    });
+    console.log(data);
+    // splitting into one object with key:value pairs
+    data.forEach((data) => {
+      setResults((prevState) => ({
+        ...prevState,
+        [data.username]: data.scoreKeeper,
+      }));
+    });
+  }
+
+  const playerResults = Object.keys(results).map((r) => {
+    return (
+      <div key={r} value={r}>
+        {r}: {results[r]}
+      </div>
+    );
+  });
+
+  useEffect(() => {
+    fetchResults();
+  }, []);
+
+  return (
+    <div>
+      <h1>Games Scores:</h1>
+      {playerResults}
+
+      <button onClick={() => navigate("/Leaderboard")}>
+        Go to the Leaderboard
+      </button>
+    </div>
+  );
 }
 
 export default QuizResults;
