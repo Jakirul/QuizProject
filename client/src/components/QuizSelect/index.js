@@ -28,6 +28,7 @@ function QuizSelect() {
   const setGame = async (e) => {
     e.preventDefault();
 
+    alert("here")
     const form = e.target;
     try {
       const options = {

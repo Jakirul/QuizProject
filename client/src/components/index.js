@@ -4,3 +4,5 @@ export { default as QuizGame } from "./QuizGame";
 export { default as QuizResults } from "./QuizResults";
 export { default as QuizSelect } from "./QuizSelect";
 export { default as Register } from "./Register";
+export { default as QuizGameQuestions } from "./QuizGameQuestions";
+export { default as Timer } from "./Timer";
