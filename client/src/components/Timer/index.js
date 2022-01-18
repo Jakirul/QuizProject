@@ -8,14 +8,29 @@ function Timer({handleSubmit}){
 
     const socketConnection = useSelector(state => state.player.socketConnection)
 
-    socketConnection.socketConnect.on('countdown', (time) => {
-        setTimer(time);
-    })
-    
-    socketConnection.socketConnect.on('timeUp',() => {
-        setTimeUp(true)
+    useEffect(() => {
+        socketConnection.socketConnect.on('countdown', (time) => {
+            setTimer(time);
+        })
         
-    })
+        socketConnection.socketConnect.on('timeUp',() => {
+            setTimeUp(true)
+            
+        })
+
+        return () => {
+            socketConnection.socketConnect.off('countdown', (time) => {
+                setTimer(time);
+            })
+            
+            socketConnection.socketConnect.off('timeUp',() => {
+                setTimeUp(true)
+                
+            })
+        }
+    }, [])
+
+    
 
     useEffect(() => {
         if(timeUp){
