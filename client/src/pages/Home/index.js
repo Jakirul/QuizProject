@@ -12,7 +12,7 @@ function Home() {
         <Link to="/QuizPage">
           <button className="button">New Quiz</button>
         </Link>
-        <Link to="/QuizWaiting">
+        <Link to="/join">
           <button className="button">Join Game</button>
         </Link>
         <Link to="LeaderBoard">
