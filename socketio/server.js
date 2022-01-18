@@ -15,7 +15,7 @@ io.on("connection", socket => {
     socket.on('create', (roomId) => {
         socket.join(roomId);
 
-        playerIdList.push({ room: roomId, id: socket.id, username: socket.id, userReady: false });
+        playerIdList.push({ room: roomId, id: socket.id, username: socket.id, userReady: false, timer: false });
 
         io.to(roomId).emit('lobby-players', playerIdList.filter(game => game.room === roomId))
 
@@ -39,24 +39,25 @@ io.on("connection", socket => {
             }
         });
 
-        let playerCounter = 0;
-
+    
         socket.on('timer', () => {
-            playerCounter++
-            
-            if (playerCounter >= playerIdList.length) {
+            const me = playerIdList.find(s => s.id === socket.id)
+            me.timer = true
+            const lobbyPlayers = playerIdList.filter(game => game.room === roomId)
+            if(lobbyPlayers.every(s => s.timer===true)){
+
                 let timer = 10;
                 const countdown = setInterval(function () {
                     io.to(roomId).emit('countdown', timer)
                     timer--
                     socket.on('reset', () => {
                         clearInterval(countdown)
-                        playerCounter = 0
+                        lobbyPlayers.forEach(s => s.timer = false)
                     })
                     if (timer < 0) {
                         io.to(roomId).emit('timeUp')
                         clearInterval(countdown)
-                        playerCounter = 0
+                        lobbyPlayers.forEach(s => s.timer = false)
                     }
                 }, 1000)
             }
