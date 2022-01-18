@@ -95,6 +95,7 @@ export const requestLogin = (userData) => {
 };
 
 export const logout = () => {
+  localStorage.setItem("token", "");
   return {
     type: "LOG_OUT",
   };

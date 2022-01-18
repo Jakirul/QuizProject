@@ -76,7 +76,7 @@ class Game {
 
         // If a score is more than 0, then it will append it to the leaderboard
         if (scoreKeeper > 0) {
-            Game.scoreAdder(body.username, scoreKeeper)
+          Game.scoreAdder(body.username, scoreKeeper);
         }
 
         await db.collection("scoreList").insertOne({

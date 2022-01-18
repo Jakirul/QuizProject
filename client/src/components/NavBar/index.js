@@ -6,10 +6,14 @@ import HomeIcon from "@mui/icons-material/Home";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import ExtensionIcon from "@mui/icons-material/Extension";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Login } from "../Login";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/action.js";
 
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -26,10 +30,21 @@ function NavBar() {
         </span>
         <div className="account">
           {location.pathname === "/" ? (
-            <Link to="/LoginRegister">
-              <AccountCircleIcon />
-              <div className="log-reg">Login / Register</div>
-            </Link>
+            localStorage.getItem("token") ? (
+              <button
+                onClick={() => {
+                  dispatch(logout);
+                  window.location.reload();
+                }}
+              >
+                Log Out
+              </button>
+            ) : (
+              <Link to="/LoginRegister">
+                <AccountCircleIcon />
+                <div className="log-reg">Login / Register</div>
+              </Link>
+            )
           ) : (
             <span>
               <button onClick={() => navigate(-1)}>

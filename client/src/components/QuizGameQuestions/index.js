@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { userAnswer } from '../../redux/actions/action.js'
 import { useSelector, useDispatch } from 'react-redux'
 import './QuizGameQuestions.css'
-import { Timer } from '../index.js';
+// import { Timer } from '../index.js';
 
 function QuizGameQuestions({ options, disabled, setDisabled}){
     const socketConnection = useSelector(state => state.player.socketConnection)
@@ -30,7 +30,7 @@ function QuizGameQuestions({ options, disabled, setDisabled}){
     })
     return (
         <div>
-            <Timer handleSubmit={handleSubmit} />
+            {/* <Timer handleSubmit={handleSubmit} /> */}
             {questionList}
             <div>
                 {selectedOption && <button onClick={handleSubmit} disabled={disabled}>Submit</button>}

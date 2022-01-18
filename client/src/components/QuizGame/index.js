@@ -33,8 +33,8 @@ function QuizGame() {
           setTimeout(() => {
             setDisableQuestion(false)
             setCurrentQuestion(currentQuestion + 1)
-            socketConnection.socketConnect.emit('reset')
-            socketConnection.socketConnect.emit('timer')
+            // socketConnection.socketConnect.emit('reset')
+            // socketConnection.socketConnect.emit('timer')
           }, 1000)
 
           // Currently, a user is set to ready=true once they click 'ready' in a lobby and when they answer one question.
@@ -77,7 +77,6 @@ function QuizGame() {
 
   return (
     <div>
-      {/* <p>timer = {timer}</p> */}
       {questions 
         ?
           <div>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./QuizSelect.css";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../NavBar"
+
+import { NavBar } from "../../components";
 
 function QuizSelect() {
   const [categorySpace, setCategorySpace] = useState({});
   const [currVal, setCurrVal] = useState(10)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchCategories = async () => {
     const response = await fetch("https://opentdb.com/api_category.php");
@@ -44,7 +45,7 @@ function QuizSelect() {
       const gameId = await r.json();
 
       console.log(gameId);
-      navigate(`/room/${gameId}`)
+      navigate(`/room/${gameId}`);
 
       if (gameId.err) {
         throw Error(gameId.err);
