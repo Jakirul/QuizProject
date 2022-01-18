@@ -28,6 +28,7 @@ function QuizSelect() {
   const setGame = async (e) => {
     e.preventDefault();
 
+    alert("here")
     const form = e.target;
     try {
       const options = {
@@ -61,9 +62,9 @@ function QuizSelect() {
 
         <div>Difficulty Level</div>
         <select className="difficulty" name="difficulty">
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
         </select>
 
         <div>Number of Questions (1-20)</div>

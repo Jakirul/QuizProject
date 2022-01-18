@@ -47,7 +47,11 @@ io.on("connection", socket => {
                 const countdown = setInterval(function(){
                     io.to(roomId).emit('countdown', timer)
                     timer--
-                    if(timer===0){
+                    socket.on('reset', ()=>{
+                        clearInterval(countdown)
+                        playerCounter = 0
+                    })
+                    if(timer<0){
                         io.to(roomId).emit('timeUp')
                         clearInterval(countdown)
                         playerCounter = 0
