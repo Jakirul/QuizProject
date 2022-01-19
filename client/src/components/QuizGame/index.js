@@ -15,6 +15,7 @@ function QuizGame() {
   const socketConnection = useSelector(state => state.player.socketConnection)
   const answers = useSelector(state => state.player.answerList)
 
+  
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [disableQuestion, setDisableQuestion] = useState(false);
   

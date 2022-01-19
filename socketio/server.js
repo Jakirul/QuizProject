@@ -23,6 +23,11 @@ io.on("connection", socket => {
             playerIdList.find(s => s.id === socket.id).username = nickname
             io.in(roomId).emit('lobby-players', playerIdList.filter(game => game.room === roomId))
         })
+        
+        socket.on("message", (message) => {
+            console.log(message)
+            io.in(roomId).emit('new-message', message)
+        })
 
         //handle ready function
         socket.on('isReady', (socketId) => {

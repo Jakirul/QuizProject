@@ -16,6 +16,8 @@ const playerReducer = (state = initState, action) => {
         { ...toggle, userReady: !toggle.userReady },
         ...state.playerList.slice(state.playerList.indexOf(toggle) + 1),
       ];
+     
+
 
       return { ...state, playerList: player };
 
