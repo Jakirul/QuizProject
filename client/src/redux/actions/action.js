@@ -51,7 +51,7 @@ export const login = (token) => {
       const user = await jwt_decode(token);
       console.log(user)
       localStorage.setItem("token", token);
-      localStorage.setItem("username", user.username)
+      localStorage.setItem("username", user.username);
       dispatch({
         type: "LOG_IN",
         payload: user,

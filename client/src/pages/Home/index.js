@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
+    <div className="home">
       <NavBar />
       <div id="welcome">Welcome to inQUIZitive!</div>
       <main className="button-stack">
