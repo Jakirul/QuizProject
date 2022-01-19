@@ -3,10 +3,11 @@ import "./QuizSelect.css";
 import { useNavigate } from "react-router-dom";
 
 import { NavBar } from "../../components";
+import QuizGame from "../QuizGame";
 
 function QuizSelect() {
   const [categorySpace, setCategorySpace] = useState({});
-  const [currVal, setCurrVal] = useState(10)
+  const [currVal, setCurrVal] = useState(10);
   const navigate = useNavigate();
 
   const fetchCategories = async () => {
@@ -60,7 +61,7 @@ function QuizSelect() {
       <NavBar />
       <h1>Select New Quiz</h1>
 
-      <form onSubmit={setGame}>
+      <form className="form" onSubmit={setGame}>
         <div>Category</div>
         <select className="categoryId" name="categoryId">
           {fullCategory}
@@ -74,11 +75,21 @@ function QuizSelect() {
         </select>
 
         <div>Number of Questions (1-20)</div>
-        <input type="range" name="range" value={currVal} min="1" max="20" onInput={(e) => setCurrVal(e.target.value)} />
+
+        <input
+          type="range"
+          name="range"
+          value={currVal}
+          min="1"
+          max="20"
+          onInput={(e) => setCurrVal(e.target.value)}
+        />
+
         <label htmlFor="range">{currVal}</label>
 
         <input type="submit" />
       </form>
+      {/* <QuizGame maxQVal={currVal} /> */}
     </div>
   );
 }
