@@ -10,7 +10,11 @@ import {
   unreadyPlayers,
 } from "../../redux/actions/action.js";
 import NavBar from "../../components/NavBar";
-import { TwitterShareButton, TwitterIcon } from "react-share";
+import {
+  TwitterShareButton,
+  TwitterIcon,
+} from "react-share";
+import './QuizWaiting.css'
 
 const url = "http://localhost:5001";
 
@@ -22,11 +26,10 @@ function QuizWaiting() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState("");
   const [result, setResult] = useState();
+  const [message, setMessage] = useState([])
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
-  const socketConnection = useSelector(
-    (state) => state.player.socketConnection
-  );
+  const socketConnection = useSelector((state) => state.player.socketConnection);
 
   useEffect(() => {
     dispatch(socketConnections({ socketConnect }));
@@ -41,6 +44,15 @@ function QuizWaiting() {
     });
   }, []);
 
+  const sendMessage = (e) => {
+    
+    e.preventDefault();
+    let message = e.target.message.value
+    console.log(message)
+    socketConnection.socketConnect.emit("message", ({nickname, message}));
+
+  }
+
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1000);
     if (socketConnection !== undefined) {
@@ -49,13 +61,22 @@ function QuizWaiting() {
           "username",
           localStorage.getItem("username")
         );
+        setNickname(localStorage.getItem("username"))
+        
       } else {
         socketConnection.socketConnect.emit(
           "username",
           `Guest User-${randomNumber}`
         );
+        setNickname(`Guest User-${randomNumber}`)
       }
+
+      socketConnection.socketConnect.on("receive-message", (nickname, message) => {
+        console.log(nickname, message)
+        setMessage(prevState => [...prevState, {nickname: nickname, message: message}])
+      })
     }
+
   }, [socketConnection]);
 
   useEffect(() => {
@@ -68,20 +89,23 @@ function QuizWaiting() {
     }
   }, [lobbyPlayers]);
 
+  
   const editUsername = async (e) => {
-    const username = await fetch(`http://localhost:3001/user/${nickname}`);
+    const username = await fetch(`http://localhost:3001/user/${nickname}`)
     const data = await username.json();
 
     function userExists(username) {
-      return lobbyPlayers.some(function (el) {
-        return el.player.username === username;
-      });
+        return lobbyPlayers.some(function(el) {
+            return el.player.username === username;
+        }); 
     }
 
-    if (data.status === false || userExists(nickname)) return;
-
+    if (data.status === false || userExists(nickname)) return
+ 
     socketConnection.socketConnect.emit("username", nickname);
+
   };
+
 
   function togglereadyPlayers() {
     socketConnection.socketConnect.emit(
@@ -125,10 +149,20 @@ function QuizWaiting() {
     })();
   }, [id]);
 
+  const messageList = message.map((message, i) => {
+    console.log(message)
+    return (
+      <div key={i}>
+        <li>{message.nickname}: {message.message}</li>
+      </div>
+    )
+  })
+
   return (
     <div>
       <NavBar />
 
+      <div className="QuizWaiting">
       {!result ? (
         <div>
           <TwitterShareButton
@@ -173,6 +207,18 @@ function QuizWaiting() {
           <h1>No games found with the id '{id}'</h1>
         </div>
       )}
+
+      <div>
+        <form onSubmit={sendMessage}>
+          <input name="message" />
+          <input type="submit" />
+        </form>
+
+        <main>
+          {messageList}
+        </main>
+      </div>
+      </div>
     </div>
   );
 }
