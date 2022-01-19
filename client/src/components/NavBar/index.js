@@ -43,7 +43,7 @@ function NavBar() {
         </div>
         <span>
           <ExtensionIcon />
-          inQUIZitive
+           inQUIZitive 
           <ExtensionIcon />
         </span>
         <div className="account">

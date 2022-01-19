@@ -22,6 +22,7 @@ class Game {
   }
 
   static scoreAdder(username, userScore) {
+    console.log("USERNAME = ", username, userScore)
     return new Promise(async (resolve, reject) => {
       try {
         let db = await init();
@@ -53,7 +54,7 @@ class Game {
     });
   }
 
-  static setAnswer(socketId, gameId, body) {
+  static setAnswer(socketId, gameId, body, loggedIn) {
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
@@ -70,12 +71,28 @@ class Game {
           playerAns: body.answers[index],
         }));
 
+        const difficulty = answerResults[0].difficulty
+        let difficultyPoints
+        if(difficulty==='hard'){
+          difficultyPoints=4
+        } else if (difficulty==='medium'){
+          difficultyPoints=2
+        } else {
+          difficultyPoints=1
+        }
+        
         const scoreKeeper =
           resultMap.filter((result) => result.playerCorrAns === true).length *
-          10;
+          difficultyPoints;
+       
 
         // If a score is more than 0, then it will append it to the leaderboard
-        if (scoreKeeper > 0) {
+        console.log(typeof(loggedIn))
+        console.log(loggedIn)
+        console.log()
+        console.log()
+        console.log()
+        if (scoreKeeper > 0 && loggedIn === "true") {
           Game.scoreAdder(body.username, scoreKeeper);
         }
 
@@ -90,19 +107,6 @@ class Game {
         resolve("Successfully appended score");
       } catch (err) {
         reject(`Can't get any answers from this list: ${err.message}`);
-      }
-    });
-  }
-
-  static logScore(username, score) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        if (score > 0) {
-          Game.scoreAdder(username, score);
-        }
-        resolve("score added");
-      } catch (err) {
-        reject(`Cannot log the score: ${err.message}`);
       }
     });
   }
@@ -195,7 +199,7 @@ class AllQuestions {
     this.questions = data.questions.results.map((list) => ({
       category: list.category,
       question: list.question,
-      allAnswers: list.incorrect_answers.concat([list.correct_answer]),
+      allAnswers: list.incorrect_answers.concat([list.correct_answer]).sort(() => Math.random() - 0.5),
       correctAns: list.correct_answer,
       difficulty: list.difficulty,
     }));

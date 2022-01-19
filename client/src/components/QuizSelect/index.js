@@ -57,7 +57,7 @@ function QuizSelect() {
   };
 
   return (
-    <div className="QuizSelection">
+    <div role="outerDiv" className="QuizSelection">
       <NavBar />
       <h1>Select New Quiz</h1>
 

@@ -7,10 +7,8 @@ import {
 } from "../../redux/actions/action.js";
 import GameQuizQuestions from "../QuizGameQuestions";
 import "./QuizGame.css";
-import { QuizSelect } from "../QuizSelect";
-import store from "../../redux/store/store";
 
-function QuizGame({ maxQVal }) {
+function QuizGame() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,12 +16,12 @@ function QuizGame({ maxQVal }) {
   const lobbyPlayers = useSelector((state) => state.player.playerList);
   console.log(lobbyPlayers);
   const questions = useSelector((state) => state.player.questions);
-  console.log(questions);
   const socketConnection = useSelector(
     (state) => state.player.socketConnection
   );
   const answers = useSelector((state) => state.player.answerList);
-
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    console.log("logged in inside quiz game", isLoggedIn)
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
   const [time, setTime] = useState(10);
@@ -87,11 +85,12 @@ function QuizGame({ maxQVal }) {
           };
 
           fetch(
-            `http://localhost:3001/${socketConnection.socketConnect.id}/${id}/answers`,
+            `http://localhost:3001/${socketConnection.socketConnect.id}/${id}/${isLoggedIn}/answers`,
             options
           );
 
           setTimeout(() => navigate(`/results/${id}`), 2000);
+          dispatch(unreadyPlayers());
         }
       }
     }
@@ -151,7 +150,7 @@ function QuizGame({ maxQVal }) {
         </div>
       ) : null}
 
-      <label for="progress-bar">Your game progress: </label>
+      <label htmlFor="progress-bar">Your game progress: </label>
       {questions && (
         <progress
           id="progress-bar"
@@ -162,6 +161,6 @@ function QuizGame({ maxQVal }) {
     </div>
   );
 }
-// max={maxQVal} - props not working atm
-// make max dependant on the num of questions the user selects in QuizSelect
+
+
 export default QuizGame;

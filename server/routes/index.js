@@ -7,14 +7,13 @@ const {verifyToken} = require('../middleware/auth.js')
 router.use(express.json());
 
 router.get('/', gameController.home)
-router.post('/:username/:score', gameController.scoreAdder)
+router.post('/:username/:score',verifyToken, gameController.scoreAdder)
 router.post('/game/:categoryId/:difficulty/:range', gameController.setGame)
-router.post('/:socketId/:gameId/answers', gameController.setAnswer)
+router.post('/:socketId/:gameId/:loggedIn/answers', gameController.setAnswer)
 router.get('/results/:id', gameController.getGameResults)
 router.get('/exists/:id', gameController.lobbyExists)
 router.get('/quizAnswers/:id', gameController.getGameId)
 router.get('/all/leaderboard', gameController.showLeaderboard)
-router.patch('/:username/:score', verifyToken, gameController.logScore)
 
 router.post('/login', authController.login)
 router.post('/register', authController.register)

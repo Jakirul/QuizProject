@@ -191,6 +191,7 @@ function QuizWaiting() {
                 <input
                   type="text"
                   onChange={(e) => setNickname(e.target.value)}
+                  className="nickname"
                   required
                 />
                 <button onClick={editUsername}>Change Username</button>

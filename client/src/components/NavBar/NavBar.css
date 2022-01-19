@@ -1,8 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  border: solid 1px red;
+  font-family:'Lilita One', cursive;
 }
 
 .nav-wrap {
@@ -10,9 +8,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(68, 184, 68);
-  font-size: 15px;
+  background-color: black;
+  font-size: 18px;
   color: white;
+  border-radius: 10px;
 }
 
 .Home-wrap,
@@ -20,6 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .home-icon {
