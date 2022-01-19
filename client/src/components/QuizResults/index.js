@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { store } from "../../redux/store/store";
+import store from "../../redux/store/store";
 import { useSelector } from "react-redux";
 
 function QuizResults() {
@@ -31,7 +31,7 @@ function QuizResults() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       };
-      const scoreData = await fetch(
+      await fetch(
         `http://localhost:3001/${currentUser.username}/${
           data[currentUser.username]
         }`,
