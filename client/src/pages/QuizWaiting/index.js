@@ -10,11 +10,8 @@ import {
   unreadyPlayers,
 } from "../../redux/actions/action.js";
 import NavBar from "../../components/NavBar";
-import {
-  TwitterShareButton,
-  TwitterIcon,
-} from "react-share";
-import './QuizWaiting.css'
+import { TwitterShareButton, TwitterIcon } from "react-share";
+import "./QuizWaiting.css";
 
 const url = "http://localhost:5001";
 
@@ -26,7 +23,7 @@ function QuizWaiting() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState("");
   const [result, setResult] = useState();
-  const [message, setMessage] = useState([])
+  const [message, setMessage] = useState([]);
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
   const socketConnection = useSelector((state) => state.player.socketConnection);
@@ -45,13 +42,10 @@ function QuizWaiting() {
   }, []);
 
   const sendMessage = (e) => {
-    
     e.preventDefault();
-    let message = e.target.message.value
-    console.log(message)
-    socketConnection.socketConnect.emit("message", ({nickname, message}));
-
-  }
+    let message = e.target.message.value;
+    socketConnection.socketConnect.emit("message", { nickname, message });
+  };
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1000);
@@ -61,20 +55,24 @@ function QuizWaiting() {
           "username",
           localStorage.getItem("username")
         );
-        setNickname(localStorage.getItem("username"))
-        
+        setNickname(localStorage.getItem("username"));
       } else {
         socketConnection.socketConnect.emit(
           "username",
           `Guest User-${randomNumber}`
         );
-        setNickname(`Guest User-${randomNumber}`)
+        setNickname(`Guest User-${randomNumber}`);
       }
 
-      socketConnection.socketConnect.on("receive-message", (nickname, message) => {
-        console.log(nickname, message)
-        setMessage(prevState => [...prevState, {nickname: nickname, message: message}])
-      })
+      socketConnection.socketConnect.on(
+        "receive-message",
+        (nickname, message) => {
+          setMessage((prevState) => [
+            ...prevState,
+            { nickname: nickname, message: message },
+          ]);
+        }
+      );
     }
 
   }, [socketConnection]);
@@ -82,7 +80,7 @@ function QuizWaiting() {
   useEffect(() => {
     if (lobbyPlayers.length > 0) {
       if (lobbyPlayers.every((player) => player.userReady === true)) {
-        navigate(`/quiz/${id}`);
+        navigate(`/quiz/${id}`, { replace: true });
         dispatch(unreadyPlayers());
         socketConnection.socketConnect.emit("timer");
       }
@@ -150,74 +148,77 @@ function QuizWaiting() {
   }, [id]);
 
   const messageList = message.map((message, i) => {
-    console.log(message)
     return (
       <div key={i}>
-        <li>{message.nickname}: {message.message}</li>
+        <li>
+          <b>{message.nickname}</b>: {message.message}
+        </li>
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <div>
       <NavBar />
 
       <div className="QuizWaiting">
-      {!result ? (
+        {!result ? (
+          <div>
+            <TwitterShareButton
+              children={<TwitterIcon size={32} round={true} />}
+              url={`http://localhost:3001/room/${id}`}
+              title="Join my game!"
+            />
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `http://localhost:3000/room/${id}`
+                );
+              }}
+            >
+              Copy URL
+            </button>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(`${id}`);
+              }}
+            >
+              Copy Code
+            </button>
+
+            {!localStorage.getItem("token") ? (
+              <div>
+                <input
+                  type="text"
+                  onChange={(e) => setNickname(e.target.value)}
+                  required
+                />
+                <button onClick={editUsername}>Change Username</button>
+              </div>
+            ) : null}
+
+            <div className="playerList">{players}</div>
+
+            <button onClick={togglereadyPlayers}>Ready Up</button>
+          </div>
+        ) : (
+          <div>
+            <button className="back" onClick={() => navigate("/")}>
+              Back to home
+            </button>
+            <h1>No games found with the id '{id}'</h1>
+          </div>
+        )}
+
         <div>
-          <TwitterShareButton
-            children={<TwitterIcon size={64} round={true} />}
-            url={`http://localhost:3001/room/${id}`}
-            title="Join my game!"
-          />
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(`http://localhost:3000/room/${id}`);
-            }}
-          >
-            Copy URL
-          </button>
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(`${id}`);
-            }}
-          >
-            Copy Code
-          </button>
+          <h3>Write a message...</h3>
+          <form onSubmit={sendMessage}>
+            <input name="message" required />
+            <input type="submit" />
+          </form>
 
-          {!localStorage.getItem("token") ? (
-            <div>
-              <input
-                type="text"
-                onChange={(e) => setNickname(e.target.value)}
-              />
-              <button onClick={editUsername}>Change Username</button>
-            </div>
-          ) : null}
-
-          <div className="playerList">{players}</div>
-
-          <button onClick={togglereadyPlayers}>Ready Up</button>
+          <main>{messageList}</main>
         </div>
-      ) : (
-        <div>
-          <button className="back" onClick={() => navigate("/")}>
-            Back to home
-          </button>
-          <h1>No games found with the id '{id}'</h1>
-        </div>
-      )}
-
-      <div>
-        <form onSubmit={sendMessage}>
-          <input name="message" />
-          <input type="submit" />
-        </form>
-
-        <main>
-          {messageList}
-        </main>
-      </div>
       </div>
     </div>
   );

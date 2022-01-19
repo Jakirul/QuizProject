@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./NavBar.css";
@@ -13,7 +13,17 @@ function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const socketConnection = useSelector((state) => state.player.socketConnection);
+  const socketConnection = useSelector(
+    (state) => state.player.socketConnection
+  );
+
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "/QuizPage") {
+      if (socketConnection !== undefined) {
+        socketConnection.socketConnect.disconnect();
+      }
+    }
+  });
 
   useEffect(()=>{
     if (location.pathname === '/' || location.pathname === '/QuizPage') {
@@ -22,7 +32,7 @@ function NavBar() {
       }
     }
   });
-  
+
   return (
     <div>
       <nav className="nav-wrap">

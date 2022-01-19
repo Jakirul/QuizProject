@@ -8,6 +8,7 @@ import {
 import GameQuizQuestions from "../QuizGameQuestions";
 import "./QuizGame.css";
 import { QuizSelect } from "../QuizSelect";
+import store from "../../redux/store/store";
 
 function QuizGame({ maxQVal }) {
   const { id } = useParams();
@@ -17,6 +18,7 @@ function QuizGame({ maxQVal }) {
   const lobbyPlayers = useSelector((state) => state.player.playerList);
   console.log(lobbyPlayers);
   const questions = useSelector((state) => state.player.questions);
+  console.log(questions);
   const socketConnection = useSelector(
     (state) => state.player.socketConnection
   );
@@ -24,25 +26,28 @@ function QuizGame({ maxQVal }) {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
-  const [time, setTime] = useState();
-
-  const countdownTimer = () => {
-    setTime(10);
-    const countdown = setInterval(function () {
-      setTime((x) => x - 1);
-      if (time <= 0) {
-        clearInterval(countdown);
-      }
-    }, 1000);
-  };
+  const [time, setTime] = useState(10);
+  const [isActive, setIsActive] = useState(true);
 
   const resetTimer = () => {
-    setTime(0);
+    setIsActive(false);
   };
 
   useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setTime((seconds) => seconds - 1);
+      }, 1000);
+    } else if (!isActive) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, time]);
+
+  useEffect(() => {
     dispatch(retrieveQuizAnswer(id));
-    countdownTimer();
+    setIsActive(true);
   }, []);
 
   useEffect(() => {
@@ -55,7 +60,8 @@ function QuizGame({ maxQVal }) {
             setDisableQuestion(false);
             setCurrentQuestion(currentQuestion + 1);
             resetTimer();
-            countdownTimer();
+            setTime(10);
+            setIsActive(true);
             // socketConnection.socketConnect.emit('reset')
             // socketConnection.socketConnect.emit('timer')
           }, 1000);
@@ -104,9 +110,19 @@ function QuizGame({ maxQVal }) {
     );
   });
 
+  const exitQuiz = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to leave? Your progress will not be saved!"
+      ) === true
+    ) {
+      navigate("/", { replace: true });
+    }
+  };
+
   return (
     <div>
-      <button onClick={() => navigate("/")}>Exit Quiz</button>
+      <button onClick={exitQuiz}>Exit Quiz</button>
       <p>timer: {time}</p>
       {questions ? (
         <div>
@@ -120,6 +136,8 @@ function QuizGame({ maxQVal }) {
             options={questions[currentQuestion].allAnswers}
             disabled={disableQuestion}
             setDisabled={setDisableQuestion}
+            timer={time}
+            reset={resetTimer}
           />
           {players}
           {disableQuestion === true ? (
@@ -134,7 +152,13 @@ function QuizGame({ maxQVal }) {
       ) : null}
 
       <label for="progress-bar">Your game progress: </label>
-      <progress id="progress-bar" value={currentQuestion} max="20"></progress>
+      {questions && (
+        <progress
+          id="progress-bar"
+          value={currentQuestion}
+          max={questions.length}
+        ></progress>
+      )}
     </div>
   );
 }

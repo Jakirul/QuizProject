@@ -1,18 +1,14 @@
 .QuizWaiting {
-    display: flex;
+  display: flex;
 
-    list-style-type: none;
+  list-style-type: none;
 }
-
 
 .QuizWaiting > div {
-    width: 100%;
+  width: 100%;
 }
 
-
-.QuizWaiting > div button {
-    background-color: red;
-    color: red;
+.QuizWaiting > div > button {
+  border: none;
+  padding: 10px 20px;
 }
-
-

@@ -35,10 +35,10 @@ io.on("connection", (socket) => {
       );
     });
 
-    socket.on("message", ({nickname, message}) => {
-        console.log(nickname, message)
-        io.in(roomId).emit("receive-message", nickname, message)
-    })
+    socket.on("message", ({ nickname, message }) => {
+      console.log(nickname, message);
+      io.in(roomId).emit("receive-message", nickname, message);
+    });
 
     //handle ready function
     socket.on("isReady", (socketId) => {
