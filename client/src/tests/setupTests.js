@@ -5,28 +5,41 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, combineReducers } from "redux";
+import userEvent from '@testing-library/user-event';
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import playerReducer from "../redux/reducers/playerReducer.js";
+import loggingReducer from "../redux/reducers/loggingReducer.js";
+import { PersistGate } from 'redux-persist/integration/react'
 
-import playerReducer from "../reducers/playerReducer.js";
-import loggingReducer from "../reducers/loggingReducer.js";
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+ 
+
+
 
 const TestProviders = ({ initState, initState2 }) => {
   initState ||= { playerList: [], answerList: [] };
-  initState2 = { isLoggedIn: false, currentUser: {} };
+  initState2 = { isLoggedIn: false, currentUser: {}, error: "" }
 
-  let testReducerPlayer = () => playerReducer(initState, { type: "@@INIT" });
-  let testReducerAuth = () => loggingReducer(initState2, { type: "@@INIT" });
+  let testReducerPlayer = () => persistReducer(persistConfig, playerReducer(initState, { type: "@@INIT" }))
 
-  const testStore = createStore(
+  let testReducerAuth = () => persistReducer(persistConfig, loggingReducer(initState2, { type: "@@INIT" }))
+
+  let store = createStore(
     combineReducers({
       player: testReducerPlayer,
       auth: testReducerAuth,
     }),
     composeWithDevTools(applyMiddleware(thunk))
   );
+  let persistor = persistStore(store)
 
-  return ({ children }) => <Provider store={testStore}>{children}</Provider>;
+  return ({ children }) => <Provider store={store}><PersistGate loading={null} persistor={persistor}>{children}</PersistGate></Provider>;
 };
 
 const renderWithReduxProvider = (ui, options = {}) => {
@@ -36,3 +49,5 @@ const renderWithReduxProvider = (ui, options = {}) => {
 
 global.renderWithReduxProvider = renderWithReduxProvider;
 global.React = React;
+global.render = render;
+global.userEvent = userEvent;

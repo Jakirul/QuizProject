@@ -31,7 +31,7 @@ function Register() {
     }
   };
   return (
-    <form id="register-form" onSubmit={register}>
+    <form id="register-form" role="register" onSubmit={register}>
       <div>
         <label>Email address</label>
         <input
@@ -70,7 +70,7 @@ function Register() {
           aria-describedby="confirmPasswordHelp"
         ></input>
       </div>
-      <input type="submit" />
+      <input type="submit" id="submitButton" />
     </form>
   );
 }

@@ -61,7 +61,7 @@ function QuizSelect() {
       <NavBar />
       <h1>Select New Quiz</h1>
 
-      <form className="form" onSubmit={setGame}>
+      <form className="form" role="set-game" onSubmit={setGame}>
         <div>Category</div>
         <select className="categoryId" name="categoryId">
           {fullCategory}

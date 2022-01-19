@@ -159,7 +159,7 @@ function QuizWaiting() {
   });
 
   return (
-    <div>
+    <div role="waiting">
       <NavBar />
 
       <div className="QuizWaiting">
@@ -195,7 +195,7 @@ function QuizWaiting() {
                   className="nickname"
                   required
                 />
-                <button onClick={editUsername}>Change Username</button>
+                <button onClick={editUsername} role="editUsername">Change Username</button>
               </div>
             ) : null}
 
@@ -214,7 +214,7 @@ function QuizWaiting() {
 
         <div>
           <h3>Write a message...</h3>
-          <form onSubmit={sendMessage}>
+          <form onSubmit={sendMessage} role="sendMessage">
             <input name="message" required />
             <input type="submit" />
           </form>

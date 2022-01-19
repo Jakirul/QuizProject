@@ -23,7 +23,7 @@ const JoinQuiz = () => {
 
   };
   return (
-    <div className="join">
+    <div className="join" role="join">
       <NavBar />
       {/* <button className="back" onClick={() => history(-1)}>
         Go back
@@ -31,9 +31,9 @@ const JoinQuiz = () => {
       <div className="inner-joinquiz">
         <h1>Join Existing Lobby</h1>
 
-        <form onSubmit={joinRoom}>
+        <form role="joinForm" className="joinForm" onSubmit={joinRoom}>
           <input name="room" required placeholder="Enter lobby name here" />
-          <input type="submit" value="Go!" />
+          <input type="submit" value="Go!" role="go" />
         </form>
 
         <b>{result}</b>

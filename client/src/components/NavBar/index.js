@@ -34,7 +34,7 @@ function NavBar() {
   });
 
   return (
-    <div>
+    <div role="nav">
       <nav className="nav-wrap">
         <div className="Home-wrap">
           <Link to="/">

@@ -54,7 +54,7 @@ function QuizResults() {
   }, []);
 
   return (
-    <div>
+    <div role="score">
       <h1>Games Scores:</h1>
       {playerResults}
 

@@ -28,7 +28,7 @@ const Leaderboard = () => {
   const allLeaderboard = leaderboard.map(leaderboard => {
 
     return (
-      <div className="leaderboard-score" key={leaderboard._id}>
+      <div className="leaderboard-score" role="leaderboard-score" key={leaderboard._id}>
         <p>Name: {leaderboard.name}</p>
         <p>Score: {leaderboard.score}</p>
       </div>
@@ -36,12 +36,12 @@ const Leaderboard = () => {
   })
 
   return (
-    <div className="Leaderboard">
+    <div className="Leaderboard" role="leaderboard">
       <NavBar />
-      <h1>Leaderboard</h1>
+      <h1 role="header">Leaderboard</h1>
       <div className="sorting-btns">
-        <button onClick={sorting}>Sort by Ascending</button>
-        <button onClick={sorting}>Sort by Descending</button>
+        <button onClick={sorting} role="Ascending">Sort by Ascending</button>
+        <button onClick={sorting} role="Descending">Sort by Descending</button>
       </div>
       {allLeaderboard}
 
