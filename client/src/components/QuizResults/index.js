@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useSelector } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { store } from "../../redux/store/store";
+import { useSelector } from "react-redux";
 
 function QuizResults() {
   const [results, setResults] = useState({});

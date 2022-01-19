@@ -12,21 +12,6 @@ function QuizGameQuestions({ options, disabled, setDisabled }) {
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState(null);
   console.log(selectedOption);
-  const [time, setTime] = useState();
-
-  //   const countdownTimer = () => {
-  //     setTime(10);
-  //     const countdown = setInterval(function () {
-  //       setTime((x) => x - 1);
-  //       if (time <= 0) {
-  //         clearInterval(countdown);
-  //       }
-  //     }, 1000);
-  //   };
-
-  //   const resetTimer = () => {
-  //     setTime(10);
-  //   };
 
   const handleSubmit = () => {
     dispatch(userAnswer(selectedOption));
