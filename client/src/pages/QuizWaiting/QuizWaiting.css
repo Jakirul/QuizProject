@@ -1,0 +1,18 @@
+.QuizWaiting {
+    display: flex;
+
+    list-style-type: none;
+}
+
+
+.QuizWaiting > div {
+    width: 100%;
+}
+
+
+.QuizWaiting > div button {
+    background-color: red;
+    color: red;
+}
+
+
