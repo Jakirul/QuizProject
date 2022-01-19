@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./QuizSelect.css";
-import { NavBar } from "./";
+import { useNavigate } from "react-router-dom";
+
+import { NavBar } from "../../components";
+import QuizGame from "../QuizGame";
 
 function QuizSelect() {
   const [categorySpace, setCategorySpace] = useState({});
+  const [currVal, setCurrVal] = useState(10);
+  const navigate = useNavigate();
 
   const fetchCategories = async () => {
     const response = await fetch("https://opentdb.com/api_category.php");
@@ -41,6 +46,8 @@ function QuizSelect() {
       const gameId = await r.json();
 
       console.log(gameId);
+      navigate(`/room/${gameId}`);
+
       if (gameId.err) {
         throw Error(gameId.err);
       }
@@ -51,9 +58,10 @@ function QuizSelect() {
 
   return (
     <div className="QuizSelection">
+      <NavBar />
       <h1>Select New Quiz</h1>
 
-      <form onSubmit={setGame}>
+      <form className="form" onSubmit={setGame}>
         <div>Category</div>
         <select className="categoryId" name="categoryId">
           {fullCategory}
@@ -61,15 +69,27 @@ function QuizSelect() {
 
         <div>Difficulty Level</div>
         <select className="difficulty" name="difficulty">
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
         </select>
 
         <div>Number of Questions (1-20)</div>
-        <input name="range" type="range" min="0" max="20" />
+
+        <input
+          type="range"
+          name="range"
+          value={currVal}
+          min="1"
+          max="20"
+          onInput={(e) => setCurrVal(e.target.value)}
+        />
+
+        <label htmlFor="range">{currVal}</label>
+
         <input type="submit" />
       </form>
+      {/* <QuizGame maxQVal={currVal} /> */}
     </div>
   );
 }

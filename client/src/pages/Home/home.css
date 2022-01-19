@@ -1,13 +1,16 @@
 * {
   box-sizing: border-box;
 }
-
+.home {
+  background-color: aquamarine;
+}
 .button {
   padding: 50px;
   display: flex;
   margin-top: 40px;
   width: 200px;
   border-radius: 20px;
+  justify-content: center;
 }
 
 .button-stack {
@@ -15,11 +18,15 @@
   flex-direction: column;
   text-align: center;
   align-items: center;
-  justify-content: center;
+}
+
+.button-stack > a {
+  text-decoration: none;
 }
 
 #welcome {
   text-align: center;
   margin-top: 40px;
-  background-color: green;
+  background-color: rgb(68, 184, 68);
+  color: white;
 }

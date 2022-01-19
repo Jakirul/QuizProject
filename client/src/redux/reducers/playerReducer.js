@@ -1,4 +1,7 @@
-const initState = { playerList: [], answerList: [] };
+const initState = {
+  playerList: [],
+  answerList: [],
+};
 
 const playerReducer = (state = initState, action) => {
   switch (action.type) {

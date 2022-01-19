@@ -1,2 +1,12 @@
 .QuizSelection {
+  /* display: flex; */
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-color: black;
+}
+h1 {
+  text-align: center;
 }
