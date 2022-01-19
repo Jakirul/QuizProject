@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./QuizGameQuestions.css";
 // import { Timer } from '../index.js';
 
-function QuizGameQuestions({ options, disabled, setDisabled }) {
+function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
   const socketConnection = useSelector(
     (state) => state.player.socketConnection
   );
@@ -21,7 +21,14 @@ function QuizGameQuestions({ options, disabled, setDisabled }) {
     );
     setDisabled(true);
     setSelectedOption(null);
+    reset();
   };
+
+  useEffect(() => {
+    if (timer <= 0) {
+      handleSubmit();
+    }
+  }, [timer]);
 
   const questionList = options.map((question, index) => {
     return (

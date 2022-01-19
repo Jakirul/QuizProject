@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./NavBar.css";
@@ -7,13 +7,23 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import ExtensionIcon from "@mui/icons-material/Extension";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Login } from "../Login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/action.js";
-
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const socketConnection = useSelector(
+    (state) => state.player.socketConnection
+  );
+
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "/QuizPage") {
+      if (socketConnection !== undefined) {
+        socketConnection.socketConnect.disconnect();
+      }
+    }
+  });
 
   return (
     <div>
