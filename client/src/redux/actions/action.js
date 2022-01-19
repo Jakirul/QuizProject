@@ -50,6 +50,7 @@ export const login = (token) => {
     try {
       const user = await jwt_decode(token);
       localStorage.setItem("token", token);
+      localStorage.setItem("username", user.username);
       dispatch({
         type: "LOG_IN",
         payload: user,
@@ -95,7 +96,7 @@ export const requestLogin = (userData) => {
 };
 
 export const logout = () => {
-  localStorage.setItem("token", "");
+  localStorage.clear();
   return {
     type: "LOG_OUT",
   };

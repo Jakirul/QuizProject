@@ -1,7 +1,9 @@
 * {
   box-sizing: border-box;
 }
-
+.home {
+  background-color: aquamarine;
+}
 .button {
   padding: 50px;
   display: flex;
@@ -10,7 +12,6 @@
   border-radius: 20px;
   justify-content: center;
 }
-
 
 .button-stack {
   display: flex;
@@ -26,5 +27,6 @@
 #welcome {
   text-align: center;
   margin-top: 40px;
-  background-color: green;
+  background-color: rgb(68, 184, 68);
+  color: white;
 }

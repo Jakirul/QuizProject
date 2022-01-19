@@ -1,42 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { userAnswer } from '../../redux/actions/action.js'
-import { useSelector, useDispatch } from 'react-redux'
-import './QuizGameQuestions.css'
+import React, { useState, useEffect } from "react";
+import { userAnswer } from "../../redux/actions/action.js";
+import { useSelector, useDispatch } from "react-redux";
+import "./QuizGameQuestions.css";
 // import { Timer } from '../index.js';
 
-function QuizGameQuestions({ options, disabled, setDisabled}){
-    const socketConnection = useSelector(state => state.player.socketConnection)
+function QuizGameQuestions({ options, disabled, setDisabled }) {
+  const socketConnection = useSelector(
+    (state) => state.player.socketConnection
+  );
 
-    const dispatch = useDispatch()
-    const [selectedOption, setSelectedOption] = useState(null)
-    console.log(selectedOption)
-    
+  const dispatch = useDispatch();
+  const [selectedOption, setSelectedOption] = useState(null);
+  console.log(selectedOption);
+  const [time, setTime] = useState();
 
-  
+  //   const countdownTimer = () => {
+  //     setTime(10);
+  //     const countdown = setInterval(function () {
+  //       setTime((x) => x - 1);
+  //       if (time <= 0) {
+  //         clearInterval(countdown);
+  //       }
+  //     }, 1000);
+  //   };
 
-    const handleSubmit = () => {
-        dispatch(userAnswer(selectedOption))
-        socketConnection.socketConnect.emit("isReady", socketConnection.socketConnect.id)
-        setDisabled(true);
-        setSelectedOption(null);
-    }
+  //   const resetTimer = () => {
+  //     setTime(10);
+  //   };
 
-    const questionList = options.map((question, index) => {
-        return (
-            <button key={index} className={selectedOption === question ? 'selected-option' : null } onClick={() => setSelectedOption(question)}>
-                <span dangerouslySetInnerHTML={{ __html: question }}></span>
-            </button>
-        )
-    })
+  const handleSubmit = () => {
+    dispatch(userAnswer(selectedOption));
+    socketConnection.socketConnect.emit(
+      "isReady",
+      socketConnection.socketConnect.id
+    );
+    setDisabled(true);
+    setSelectedOption(null);
+  };
+
+  const questionList = options.map((question, index) => {
     return (
-        <div>
-            {/* <Timer handleSubmit={handleSubmit} /> */}
-            {questionList}
-            <div>
-                {selectedOption && <button onClick={handleSubmit} disabled={disabled}>Submit</button>}
-            </div>
-        </div>
-    )
+      <button
+        key={index}
+        className={selectedOption === question ? "selected-option" : null}
+        onClick={() => setSelectedOption(question)}
+      >
+        <span dangerouslySetInnerHTML={{ __html: question }}></span>
+      </button>
+    );
+  });
+  return (
+    <div>
+      {/* <Timer handleSubmit={handleSubmit} /> */}
+      {questionList}
+      <div>
+        {selectedOption && (
+          <button onClick={handleSubmit} disabled={disabled}>
+            Submit
+          </button>
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default QuizGameQuestions
+export default QuizGameQuestions;
