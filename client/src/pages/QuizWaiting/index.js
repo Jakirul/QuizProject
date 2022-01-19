@@ -27,6 +27,7 @@ function QuizWaiting() {
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
   const socketConnection = useSelector((state) => state.player.socketConnection);
+  const username = useSelector((state) => state.auth.currentUser.username);
 
   useEffect(() => {
     dispatch(socketConnections({ socketConnect }));
@@ -50,12 +51,12 @@ function QuizWaiting() {
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1000);
     if (socketConnection !== undefined) {
-      if (localStorage.getItem("username")) {
+      if (username) {
         socketConnection.socketConnect.emit(
           "username",
-          localStorage.getItem("username")
+          username
         );
-        setNickname(localStorage.getItem("username"));
+        setNickname(username);
       } else {
         socketConnection.socketConnect.emit(
           "username",
@@ -186,7 +187,7 @@ function QuizWaiting() {
               Copy Code
             </button>
 
-            {!localStorage.getItem("token") ? (
+            {!username ? (
               <div>
                 <input
                   type="text"

@@ -23,7 +23,7 @@ const JoinQuiz = () => {
 
   };
   return (
-    <div>
+    <div className="join">
       <NavBar />
       {/* <button className="back" onClick={() => history(-1)}>
         Go back

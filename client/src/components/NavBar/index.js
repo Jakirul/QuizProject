@@ -38,13 +38,13 @@ function NavBar() {
       <nav className="nav-wrap">
         <div className="Home-wrap">
           <Link to="/">
-            <HomeIcon /> <div className="home-icon">Home </div>
+            <span className="house"><HomeIcon /> </span> <div className="home-icon">Home </div> 
           </Link>
         </div>
         <span>
           <ExtensionIcon />
            inQUIZitive 
-          <ExtensionIcon />
+          <ExtensionIcon /> 
         </span>
         <div className="account">
           {location.pathname === "/" ? (
@@ -60,14 +60,14 @@ function NavBar() {
               </button>
             ) : (
               <Link to="/LoginRegister">
-                <AccountCircleIcon />
+                <span className="person">  <AccountCircleIcon /> </span>
                 <div className="log-reg">Login / Register</div>
               </Link>
             )
           ) : (
             <span>
               <button onClick={() => navigate(-1)}>
-                <NavigateBeforeIcon />
+                <span className="back-arrow"><NavigateBeforeIcon /> </span><div className="take-back">Back</div>
               </button>
             </span>
           )}

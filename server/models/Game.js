@@ -71,7 +71,7 @@ class Game {
           playerAns: body.answers[index],
         }));
 
-        const difficulty = answerResults[0].difficulty
+        const difficulty = answersResults[0].difficulty
         let difficultyPoints
         if(difficulty==='hard'){
           difficultyPoints=4

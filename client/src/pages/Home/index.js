@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className="home">
       <NavBar />
-      <div id="welcome">Welcome to inQUIZitive!</div>
+      {/* <div id="welcome">Welcome to inQUIZitive!</div> */}
       <main className="button-stack">
         <Link to="/QuizPage">
           <button className="button">New Quiz</button>
