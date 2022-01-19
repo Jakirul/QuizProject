@@ -25,7 +25,7 @@ describe("game end points", () => {
         let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTVhNWQ5ZTJiNWUwOWJkN2RmNWJjNSIsInVzZXJuYW1lIjoidGVzdDIiLCJpYXQiOjE2NDI0NDAxNjgsImV4cCI6MTY0Mjc0MDE2OH0.36QC_s-jMyD9Uiere-O7bkwcOC62ISDP29AZaDovULc"
 
         const res = await request(api)
-            .patch('/Jakirul/12')
+            .post('/Jakirul/12')
             .set('Authorization','Bearer '+ authToken)
         
         expect(res.statusCode).toBe(200)
@@ -58,13 +58,17 @@ describe("game end points", () => {
     })
 
     it("Should post a new score for existing username", async () => {
-        const resp = await request(api).post("/Jakirul/25").send({ username: "Jakirul", score: 25 })
+        let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTVhNWQ5ZTJiNWUwOWJkN2RmNWJjNSIsInVzZXJuYW1lIjoidGVzdDIiLCJpYXQiOjE2NDI0NDAxNjgsImV4cCI6MTY0Mjc0MDE2OH0.36QC_s-jMyD9Uiere-O7bkwcOC62ISDP29AZaDovULc"
+
+        const resp = await request(api).post("/Jakirul/25").send({ username: "Jakirul", score: 25 }).set('Authorization','Bearer '+ authToken)
         expect(resp.statusCode).toEqual(200)
     })
 
     it("Should post a new score for new username", async () => {
         const randomNumber = Math.floor(Math.random() * 1000)
-        const resp = await request(api).post(`/${randomNumber}Jakirul/55`).send({ username: `${randomNumber}Jakirul`, score: 55 })
+        let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTVhNWQ5ZTJiNWUwOWJkN2RmNWJjNSIsInVzZXJuYW1lIjoidGVzdDIiLCJpYXQiOjE2NDI0NDAxNjgsImV4cCI6MTY0Mjc0MDE2OH0.36QC_s-jMyD9Uiere-O7bkwcOC62ISDP29AZaDovULc"
+
+        const resp = await request(api).post(`/${randomNumber}Jakirul/55`).send({ username: `${randomNumber}Jakirul`, score: 55 }).set('Authorization','Bearer '+ authToken)
         expect(resp.statusCode).toEqual(200)
     })
 
@@ -79,12 +83,12 @@ describe("game end points", () => {
     })
 
     it("Should be able to set answers", async () => {
-        const resp = await request(api).post("/LxelBPdcBLoFHkGQAAAK/61e300f328361bfd19522f71/answers").send({answers: ['Rosh Hashanah', 'True', 'Dogs'], username: 'LxelBPdcBLoFHkGQAAAK'})
+        const resp = await request(api).post("/LxelBPdcBLoFHkGQAAAK/61e300f328361bfd19522f71/true/answers").send({answers: ['Rosh Hashanah', 'True', 'Dogs'], username: 'LxelBPdcBLoFHkGQAAAK'})
         expect(resp.statusCode).toEqual(200)
     })
 
     it("Should fail to set answers", async () => {
-        const resp = await request(api).post("/424234/34455/answers").send({ socketId: "424234", gameId: "34455" })
+        const resp = await request(api).post("/424234/34455/true/answers").send({ socketId: "424234", gameId: "34455" })
         expect(resp.statusCode).toEqual(500)
     })
 
