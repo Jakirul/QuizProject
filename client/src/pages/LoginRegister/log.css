@@ -7,3 +7,8 @@
   background-color: darkslateblue;
   color: white;
 }
+
+.login-register {
+  position: relative; 
+  top: 100px;
+}

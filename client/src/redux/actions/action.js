@@ -74,7 +74,6 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-
       if (!data.success) {
         dispatch({
           type: "ERROR",
