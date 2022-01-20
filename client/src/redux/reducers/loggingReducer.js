@@ -25,6 +25,11 @@ const loggingReducer = (state = initState, action) => {
         currentUser: {},
         error: action.payload,
       };
+      case "RESET_ERROR":
+        return {
+          ...state,
+          error: ""
+        }
     default:
       return state;
   }
