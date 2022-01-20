@@ -18,9 +18,8 @@ function LoginRegister() {
   }, []);
 
   useEffect(() => {
-    console.log(error);
-    setErrorMessage(error);
-  }, [error]);
+    setErrorMessage(error)
+  }, [error])
 
   useEffect(() => {
     if (isLoggedIn) {

@@ -159,7 +159,10 @@ function QuizWaiting() {
 
       if (!lobby.length || lobby === "Error, cannot find a lobby") {
         setResult(`Cannot find a lobby with the name: ${id}`);
+      } else {
+        setResult()
       }
+      
     })();
   }, [id]);
 
