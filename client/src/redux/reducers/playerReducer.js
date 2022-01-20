@@ -19,8 +19,6 @@ const playerReducer = (state = initState, action) => {
         { ...toggle, userReady: !toggle.userReady },
         ...state.playerList.slice(state.playerList.indexOf(toggle) + 1),
       ];
-     
-
 
       return { ...state, playerList: player };
 
@@ -48,6 +46,9 @@ const playerReducer = (state = initState, action) => {
       
     case "RESET_ANSWER":
       return {...state, answerList: []}
+
+    case "RESET_ANSWER":
+      return { ...state, answerList: [] };
 
     case "INCREMENT_PLAYER":
       // Loops over all the players and adds it to the playerList

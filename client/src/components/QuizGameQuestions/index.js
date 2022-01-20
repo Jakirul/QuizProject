@@ -33,7 +33,9 @@ function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
     return (
       <button
         key={index}
-        className={selectedOption === question ? "selected-option" : null}
+        className={
+          selectedOption === question ? "selected-option option" : "option"
+        }
         onClick={() => setSelectedOption(question)}
       >
         <span dangerouslySetInnerHTML={{ __html: question }}></span>

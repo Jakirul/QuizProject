@@ -8,12 +8,12 @@ import HomeIcon from "@mui/icons-material/Home";
 function QuizResults() {
   const [results, setResults] = useState({});
   const { id } = useParams();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(()=>{    
-    dispatch(resetAnswer())
-  },[])
+  useEffect(() => {
+    dispatch(resetAnswer());
+  }, []);
 
   async function fetchResults() {
     const response = await fetch(`http://localhost:3001/results/${id}`);
@@ -28,21 +28,6 @@ function QuizResults() {
         [data.username]: data.scoreKeeper,
       }));
     });
-
-    // if (isLoggedIn) {
-    //   console.log("here")
-    //   const options = {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json",
-    //                 "Authorization": localStorage.getItem('token') },
-    //   };
-    //   await fetch(
-    //     `http://localhost:3001/${currentUser.username}/${
-    //       data[currentUser.username]
-    //     }`,
-    //     options
-    //   );
-    // }
   }
 
   const playerResults = Object.keys(results).map((r) => {

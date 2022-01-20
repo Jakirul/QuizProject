@@ -41,7 +41,7 @@ export const userAnswer = (quizAnswer) => ({
 });
 
 export const resetAnswer = () => ({
-  type: "RESET_ANSWER"
+  type: "RESET_ANSWER",
 });
 
 export const incrementPlayer = (incrementPlayer) => ({
@@ -104,7 +104,7 @@ export const logout = () => {
 };
 
 export const resetError = () => {
-  return{
-    type: "RESET_ERROR"
-  }
-}
+  return {
+    type: "RESET_ERROR",
+  };
+};
