@@ -4,24 +4,29 @@
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 
-.Leaderboard > .leaderboard-score {
+.Leaderboard > .overall-board {
+  position: relative;
+  top: 95px;
+}
+
+.Leaderboard > .overall-board > .leaderboard-score {
   border: 1px solid black;
   margin: 20px auto;
   width: 50%;
 }
 
-.Leaderboard > .sorting-btns > button {
+.Leaderboard > .overall-board > .sorting-btns > button {
   margin: 10px;
   background-color: rgb(80, 211, 80);
   border: 1px solid rgb(80, 211, 80);
   padding: 10px 20px;
 }
 
-.Leaderboard > .sorting-btns > button:hover {
+.Leaderboard > .overall-board > .sorting-btns > button:hover {
   background-color: rgb(68, 184, 68);
   border: 1px solid rgb(68, 184, 68);
 }
 
-.Leaderboard > .leaderboard-score > p {
+.Leaderboard > .overall-board >  .leaderboard-score > p {
   border: none;
 }

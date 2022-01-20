@@ -45,6 +45,9 @@ const playerReducer = (state = initState, action) => {
     case "ADD_USER_ANSWER":
       // Appends a new answer to the answerList state array with the payload answer without mutation
       return { ...state, answerList: [...state.answerList, action.payload] };
+      
+    case "RESET_ANSWER":
+      return {...state, answerList: []}
 
     case "INCREMENT_PLAYER":
       // Loops over all the players and adds it to the playerList

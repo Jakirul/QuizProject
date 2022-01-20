@@ -39,11 +39,13 @@ const Leaderboard = () => {
     <div className="Leaderboard" role="leaderboard">
       <NavBar />
       <h1 role="header">Leaderboard</h1>
-      <div className="sorting-btns">
-        <button onClick={sorting} role="Ascending">Sort by Ascending</button>
-        <button onClick={sorting} role="Descending">Sort by Descending</button>
+      <div className="overall-board">
+        <div className="sorting-btns">
+          <button onClick={sorting} role="Ascending">Sort by Ascending</button>
+          <button onClick={sorting} role="Descending">Sort by Descending</button>
+        </div>
+        {allLeaderboard}
       </div>
-      {allLeaderboard}
 
     </div>
   )
