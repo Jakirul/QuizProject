@@ -120,10 +120,6 @@ describe('insert', () => {
     expect(showLeaderboard).toBeDefined()
   })
 
-  it("logScore", async () => {
-    const logScore = await Game.logScore("Jakirul", "25")
-    expect(logScore).toBeDefined()
-  })
 
 
 

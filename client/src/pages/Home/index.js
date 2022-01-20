@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="home">
+    <div className="home" role="home">
       <NavBar />
-      <div id="welcome">Welcome to inQUIZitive!</div>
+      {/* <div id="welcome">Welcome to inQUIZitive!</div> */}
       <main className="button-stack">
         <Link to="/QuizPage">
           <button className="button">New Quiz</button>

@@ -45,8 +45,7 @@ function QuizSelect() {
       );
       const gameId = await r.json();
 
-      console.log(gameId);
-      navigate(`/room/${gameId}`);
+      navigate(`/room/${gameId}`, { replace: true });
 
       if (gameId.err) {
         throw Error(gameId.err);
@@ -57,11 +56,11 @@ function QuizSelect() {
   };
 
   return (
-    <div className="QuizSelection">
+    <div role="outerDiv" className="QuizSelection">
       <NavBar />
       <h1>Select New Quiz</h1>
 
-      <form className="form" onSubmit={setGame}>
+      <form className="form" role="set-game" onSubmit={setGame}>
         <div>Category</div>
         <select className="categoryId" name="categoryId">
           {fullCategory}

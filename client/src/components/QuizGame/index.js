@@ -7,26 +7,22 @@ import {
 } from "../../redux/actions/action.js";
 import GameQuizQuestions from "../QuizGameQuestions";
 import "./QuizGame.css";
-import { QuizSelect } from "../QuizSelect";
-import store from "../../redux/store/store";
 
-function QuizGame({ maxQVal }) {
+function QuizGame() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
-  console.log(lobbyPlayers);
   const questions = useSelector((state) => state.player.questions);
-  console.log(questions);
   const socketConnection = useSelector(
     (state) => state.player.socketConnection
   );
   const answers = useSelector((state) => state.player.answerList);
-
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(20);
   const [isActive, setIsActive] = useState(true);
 
   const resetTimer = () => {
@@ -51,7 +47,6 @@ function QuizGame({ maxQVal }) {
   }, []);
 
   useEffect(() => {
-    console.log("rerender");
     if (lobbyPlayers.length > 0) {
       if (lobbyPlayers.every((player) => player.userReady === true)) {
         if (currentQuestion < questions.length - 1) {
@@ -60,7 +55,7 @@ function QuizGame({ maxQVal }) {
             setDisableQuestion(false);
             setCurrentQuestion(currentQuestion + 1);
             resetTimer();
-            setTime(10);
+            setTime(20);
             setIsActive(true);
             // socketConnection.socketConnect.emit('reset')
             // socketConnection.socketConnect.emit('timer')
@@ -87,11 +82,12 @@ function QuizGame({ maxQVal }) {
           };
 
           fetch(
-            `http://localhost:3001/${socketConnection.socketConnect.id}/${id}/answers`,
+            `http://localhost:3001/${socketConnection.socketConnect.id}/${id}/${isLoggedIn}/answers`,
             options
           );
 
-          setTimeout(() => navigate(`/results/${id}`), 2000);
+          setTimeout(() => navigate(`/results/${id}`, { replace: true }), 2000);
+          dispatch(unreadyPlayers());
         }
       }
     }
@@ -121,7 +117,7 @@ function QuizGame({ maxQVal }) {
   };
 
   return (
-    <div>
+    <div role="quiz">
       <button onClick={exitQuiz}>Exit Quiz</button>
       <p>timer: {time}</p>
       {questions ? (
@@ -151,7 +147,7 @@ function QuizGame({ maxQVal }) {
         </div>
       ) : null}
 
-      <label for="progress-bar">Your game progress: </label>
+      <label htmlFor="progress-bar">Your game progress: </label>
       {questions && (
         <progress
           id="progress-bar"
@@ -162,6 +158,5 @@ function QuizGame({ maxQVal }) {
     </div>
   );
 }
-// max={maxQVal} - props not working atm
-// make max dependant on the num of questions the user selects in QuizSelect
+
 export default QuizGame;

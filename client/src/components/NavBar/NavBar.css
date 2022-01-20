@@ -2,7 +2,7 @@
   box-sizing: border-box;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  border: solid 1px red;
+  /* border: solid 1px red; */
 }
 
 .nav-wrap {
@@ -10,9 +10,24 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(68, 184, 68);
-  font-size: 15px;
+  background-color: darkslateblue;
+  font-size: 18px;
   color: white;
+  border-radius: 3px;
+  padding: 10px;
+  margin-top: -8px;
+  font-family: "Lilita One", cursive;
+}
+.house {
+  color: white;
+}
+.person {
+  color: white;
+  margin-left: 50px;
+}
+.take-back {
+  font-family: "Lilita One", cursive;
+  font-size: 18px;
 }
 
 .Home-wrap,

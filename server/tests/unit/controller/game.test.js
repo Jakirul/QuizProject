@@ -126,17 +126,6 @@ describe("test game controller", () => {
         })
     })
 
-    describe("logScore", () => {
-        test("Game.logScore will return a 200 status code", async () => {
-          
-            
-            jest.spyOn(Game, 'logScore')
-                .mockResolvedValue([]);
-                const mockReq = {params: {username: "Jakirul", score: "25"} }
-            await gameController.logScore(mockReq, mockRes);
-            expect(mockStatus).toHaveBeenCalledWith(200);
-        })
-    })
 
     
 })

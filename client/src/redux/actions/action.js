@@ -50,7 +50,6 @@ export const login = (token) => {
     try {
       const user = await jwt_decode(token);
       localStorage.setItem("token", token);
-      localStorage.setItem("username", user.username);
       dispatch({
         type: "LOG_IN",
         payload: user,
@@ -75,9 +74,8 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-      console.log(data);
+
       if (!data.success) {
-        console.log("error ");
         dispatch({
           type: "ERROR",
           payload: "Login not authorised",

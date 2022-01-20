@@ -5,7 +5,7 @@ import QuizResults from "../../components/QuizResults";
 
 function QuizPage() {
   return (
-    <div>
+    <div role="quizpage">
       <NavBar />
       <main>
         <QuizSelect />

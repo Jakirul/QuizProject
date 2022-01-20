@@ -25,19 +25,17 @@ function NavBar() {
     }
   });
 
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "/QuizPage") {
+      if (socketConnection !== undefined) {
+        socketConnection.socketConnect.disconnect();
+      }
+    }
+  });
+
   return (
-    <div>
+    <div role="nav">
       <nav className="nav-wrap">
-        <div className="Home-wrap">
-          <Link to="/">
-            <HomeIcon /> <div className="home-icon">Home </div>
-          </Link>
-        </div>
-        <span>
-          <ExtensionIcon />
-          inQUIZitive
-          <ExtensionIcon />
-        </span>
         <div className="account">
           {location.pathname === "/" ? (
             localStorage.getItem("token") ? (
@@ -51,17 +49,38 @@ function NavBar() {
               </button>
             ) : (
               <Link to="/LoginRegister">
-                <AccountCircleIcon />
+                <span className="person">
+                  {" "}
+                  <AccountCircleIcon />{" "}
+                </span>
                 <div className="log-reg">Login / Register</div>
               </Link>
             )
           ) : (
             <span>
               <button onClick={() => navigate(-1)}>
-                <NavigateBeforeIcon />
+                <span className="back-arrow">
+                  <NavigateBeforeIcon />{" "}
+                </span>
+                <div className="take-back">Back</div>
               </button>
             </span>
           )}
+        </div>
+
+        <span>
+          <ExtensionIcon />
+          inQUIZitive
+          <ExtensionIcon />
+        </span>
+
+        <div className="Home-wrap">
+          <Link to="/">
+            <span className="house">
+              <HomeIcon />
+            </span>
+            <div className="home-icon">Home </div>
+          </Link>
         </div>
       </nav>
     </div>
