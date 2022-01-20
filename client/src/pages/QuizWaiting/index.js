@@ -51,8 +51,8 @@ function QuizWaiting() {
     let message = e.target.message.value;
     socketConnection.socketConnect.emit("message", { nickname, message });
     setMessage((prevState) => [
-      ...prevState,
       { nickname: nickname, message: message, me: true },
+      ...prevState,
     ]);
 
     e.target.message.value = "";
@@ -76,8 +76,8 @@ function QuizWaiting() {
         "receive-message",
         (nickname, message) => {
           setMessage((prevState) => [
-            ...prevState,
             { nickname: nickname, message: message },
+            ...prevState,
           ]);
         }
       );
