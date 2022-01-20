@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import store from "../../redux/store/store";
 import { useSelector } from "react-redux";
 import "./QuizResults.css";
+import HomeIcon from "@mui/icons-material/Home";
 
 function QuizResults() {
   const [results, setResults] = useState({});
@@ -55,17 +56,24 @@ function QuizResults() {
 
   return (
     <div role="score">
-      <button onClick={() => navigate("/", { replace: true })}>Home </button>
-      <h1 role="header">Games Scores:</h1>
-      {playerResults}
-
-      <button onClick={() => navigate("/Leaderboard")}>
-        Go to the Leaderboard
+      <button onClick={() => navigate("/", { replace: true })}>
+        <div id="home-icon">
+          Home <HomeIcon />
+        </div>
       </button>
 
-      <div id="remember-msg">
-        Remember: if you're not logged in, your score won't be counted on the
-        leaderboard!
+      <div className="results-section">
+        <h1 role="header">Games Scores:</h1>
+        {playerResults}
+
+        <button onClick={() => navigate("/Leaderboard")}>
+          Go to the Leaderboard
+        </button>
+
+        <p id="remember-msg">
+          Remember: if you're not logged in, your score won't be counted on the
+          leaderboard!
+        </p>
       </div>
     </div>
   );
