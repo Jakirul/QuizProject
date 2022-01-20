@@ -3,6 +3,7 @@ import { Login, Register, NavBar } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { resetError } from "../../redux/actions/action";
+import "./log.css";
 
 function LoginRegister() {
   const [showRegisterForm, setRegisterForm] = useState(false);
@@ -35,7 +36,8 @@ function LoginRegister() {
           <>
             <Login error={errorMessage} />
             <button
-              onClick={() =>{
+              id="got-account"
+              onClick={() =>
                 setRegisterForm((showRegisterForm) => !showRegisterForm)
                 dispatch(resetError())
               }
