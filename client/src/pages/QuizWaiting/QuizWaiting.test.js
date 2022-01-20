@@ -33,4 +33,6 @@ describe("QuizWaiting", () => {
     });
     expect(waiting).toBeInTheDocument();
   });
+
+
 });
