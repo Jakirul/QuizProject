@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
- import {default as Navbar} from '.'
+ import {default as NavBar} from '.'
  import { render, screen } from '@testing-library/react';
  import '@testing-library/jest-dom'
  import { MemoryRouter } from 'react-router-dom';
@@ -13,7 +13,7 @@ describe("NavBar", () => {
   let mockFunction;
     beforeEach(() => {
         mockFunction = jest.fn();
-        render(<Provider store={store}><Navbar /></Provider>, { wrapper: MemoryRouter });
+        render(<Provider store={store}><NavBar /></Provider>, { wrapper: MemoryRouter });
     });
 
     test('It renders the QuizSelect div', ()=> {
@@ -22,9 +22,8 @@ describe("NavBar", () => {
     })
 
     test("it renders", () => {
-      render(<NavBar />);
-      const navigation = screen.getByRole("navigation");
-      expect(navigation.textContent).toMatch(/nav-wrap/i);
+      const navigation = screen.getByRole("nav");
+      expect(navigation.textContent).toMatch("LogininQUIZitiveHome ");
   });
 });
 
