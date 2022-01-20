@@ -35,18 +35,13 @@ h1 {
   text-align: center;
 }
 
+
 #ques-num {
   background-color: lightgreen;
   padding: 10px;
   border-radius: 10px;
   width: 200px;
-  position: absolute;
-  top: 150px;
-  right: 90px;
-  /* margin-left: 130px;
-position: absolute;
-top: 65px;
-left: 23%; */
+  margin: 0 auto;
 }
 
 #timer {

@@ -4,7 +4,7 @@
 }
 .QuizWaiting {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   list-style-type: none;
   /* position: relative; */
@@ -91,6 +91,11 @@ button {
 }
 
 @media screen and (max-width: 700px) {
+  .QuizWaiting {
+    flex-direction: column;
+    /* position: relative; */
+    /* top: 100px; */
+  }
   .share-buttons {
     justify-content: center;
   }
