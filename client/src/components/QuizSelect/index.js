@@ -88,7 +88,6 @@ function QuizSelect() {
 
         <input type="submit" />
       </form>
-      {/* <QuizGame maxQVal={currVal} /> */}
     </div>
   );
 }
