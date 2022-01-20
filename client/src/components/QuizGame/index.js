@@ -14,14 +14,13 @@ function QuizGame() {
   const dispatch = useDispatch();
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
-  console.log(lobbyPlayers);
   const questions = useSelector((state) => state.player.questions);
   const socketConnection = useSelector(
     (state) => state.player.socketConnection
   );
   const answers = useSelector((state) => state.player.answerList);
+  console.log("answers = ", answers)
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-    console.log("logged in inside quiz game", isLoggedIn)
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
   const [time, setTime] = useState(10);

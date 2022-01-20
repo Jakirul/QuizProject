@@ -16,6 +16,7 @@ export const retrieveQuizAnswer = (quizId) => {
         `http://localhost:3001/quizAnswers/${quizId}`
       );
       const questions = await quizData.json();
+      console.log("quz", questions)
 
       dispatch({
         type: "RETRIEVE_QUES",

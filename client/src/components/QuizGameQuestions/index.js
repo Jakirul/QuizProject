@@ -14,12 +14,12 @@ function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
   console.log(selectedOption);
 
   const handleSubmit = () => {
-    dispatch(userAnswer(selectedOption));
     socketConnection.socketConnect.emit(
       "isReady",
       socketConnection.socketConnect.id
     );
     setDisabled(true);
+    dispatch(userAnswer(selectedOption));
     setSelectedOption(null);
     reset();
   };

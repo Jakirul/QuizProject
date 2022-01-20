@@ -55,6 +55,7 @@ class Game {
   }
 
   static setAnswer(socketId, gameId, body, loggedIn) {
+    console.log(body)
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
@@ -72,7 +73,8 @@ class Game {
         }));
 
         const difficulty = answersResults[0].difficulty
-        let difficultyPoints
+        let difficultyPoints;
+
         if(difficulty==='hard'){
           difficultyPoints=4
         } else if (difficulty==='medium'){
@@ -173,6 +175,7 @@ class Game {
         const newGame = await db
           .collection("games")
           .insertOne({ questions: questionList });
+        
         resolve(newGame.insertedId);
       } catch (err) {
         reject(`Cannot set a game: ${err.message}`);
