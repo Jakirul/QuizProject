@@ -118,12 +118,12 @@ function QuizGame() {
 
   return (
     <div role="quiz">
-      <button id="exit-btn" onClick={exitQuiz}>
-        Exit Quiz
-      </button>
-
-      <p id="timer">timer: {time}</p>
-
+      <div id="quiz-nav-bar">
+        <button id="exit-btn" onClick={exitQuiz}>
+          Exit Quiz
+        </button>
+        <p id="timer"> {time} seconds left!</p>
+      </div>
       <div className="quiz-game-wrap">
         {questions ? (
           <div>
@@ -141,7 +141,7 @@ function QuizGame() {
               timer={time}
               reset={resetTimer}
             />
-            <div className="answers">
+            <div>
               {players}
               {disableQuestion === true ? (
                 questions[currentQuestion].correctAns ===

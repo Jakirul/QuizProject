@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
@@ -21,11 +21,14 @@ function QuizWaiting() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState("");
+  // const [nickname, setNickname] = useState("");
+  const [nicknameChosen, setNicknameChosen] = useState("");
   const [result, setResult] = useState();
   const [message, setMessage] = useState([]);
   const [copiedURL, setCopiedURL] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
+
+  const ref = useRef();
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
   const socketConnection = useSelector(
@@ -49,9 +52,12 @@ function QuizWaiting() {
   const sendMessage = (e) => {
     e.preventDefault();
     let message = e.target.message.value;
-    socketConnection.socketConnect.emit("message", { nickname, message });
+    socketConnection.socketConnect.emit("message", {
+      nicknameChosen,
+      message,
+    });
     setMessage((prevState) => [
-      { nickname: nickname, message: message, me: true },
+      { nickname: nicknameChosen, message: message, me: true },
       ...prevState,
     ]);
 
@@ -63,13 +69,13 @@ function QuizWaiting() {
     if (socketConnection !== undefined) {
       if (username) {
         socketConnection.socketConnect.emit("username", username);
-        setNickname(username);
+        setNicknameChosen(username);
       } else {
         socketConnection.socketConnect.emit(
           "username",
           `Guest User-${randomNumber}`
         );
-        setNickname(`Guest User-${randomNumber}`);
+        setNicknameChosen(`Guest User-${randomNumber}`);
       }
 
       socketConnection.socketConnect.on(
@@ -95,7 +101,9 @@ function QuizWaiting() {
   }, [lobbyPlayers]);
 
   const editUsername = async (e) => {
-    const username = await fetch(`http://localhost:3001/user/${nickname}`);
+    let value = ref.current.value;
+
+    const username = await fetch(`http://localhost:3001/user/${value}`);
     const data = await username.json();
 
     function userExists(username) {
@@ -104,9 +112,11 @@ function QuizWaiting() {
       });
     }
 
-    if (data.status === false || userExists(nickname)) return;
+    if (data.status === false || userExists(value)) return;
 
-    socketConnection.socketConnect.emit("username", nickname);
+    setNicknameChosen(value);
+    socketConnection.socketConnect.emit("username", value);
+    ref.current.value = "";
   };
 
   function togglereadyPlayers() {
@@ -117,7 +127,6 @@ function QuizWaiting() {
   }
 
   let players = lobbyPlayers.map((p, i) => {
-    
     let ready;
 
     // If the user is ready, it changes this variable
@@ -127,11 +136,10 @@ function QuizWaiting() {
       ready = "(NOT READY)";
     }
 
-  
     return (
       <div key={i}>
         {/* <p>{p.player.username}{ready}</p> */}
-        {nickname === p.player.username ? (
+        {nicknameChosen === p.player.username ? (
           <p style={{ color: "red", fontWeight: "bold" }}>
             {p.player.username}
             {ready}
@@ -160,9 +168,8 @@ function QuizWaiting() {
       if (!lobby.length || lobby === "Error, cannot find a lobby") {
         setResult(`Cannot find a lobby with the name: ${id}`);
       } else {
-        setResult()
+        setResult();
       }
-      
     })();
   }, [id]);
 
@@ -227,9 +234,10 @@ function QuizWaiting() {
               <div>
                 <input
                   type="text"
-                  onChange={(e) => setNickname(e.target.value)}
+                  // onChange={(e) => setNickname(e.target.value)}
                   className="nickname"
                   maxLength="15"
+                  ref={ref}
                   required
                 />
                 <button onClick={editUsername} role="editUsername">
