@@ -1,6 +1,8 @@
 .QuizWaiting {
   display: flex;
   list-style-type: none;
+  position: relative; 
+  top: 100px;
 }
 
 .QuizWaiting > div {
