@@ -73,3 +73,7 @@ button {
 #message-form {
   height: 20%;
 }
+
+.share-buttons {
+  display: flex;
+}

@@ -25,6 +25,7 @@ function Login({error}) {
           type="text"
           name="username"
           aria-describedby="emailHelp"
+          className="login-input"
         ></input>
       </div>
       <div>

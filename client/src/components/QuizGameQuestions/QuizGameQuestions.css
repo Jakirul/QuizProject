@@ -16,3 +16,8 @@
 .option {
   width: 100%;
 }
+
+span {
+  margin: auto; 
+  display: table;
+}

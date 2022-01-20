@@ -85,7 +85,6 @@ class Game {
           resultMap.filter((result) => result.playerCorrAns === true).length *
           difficultyPoints;
        
-
         // If a score is more than 0, then it will append it to the leaderboard
         if (scoreKeeper > 0 && loggedIn === "true") {
           Game.scoreAdder(body.username, scoreKeeper);
