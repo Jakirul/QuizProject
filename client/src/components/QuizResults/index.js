@@ -58,7 +58,10 @@ function QuizResults() {
     <div role="score">
       <button onClick={() => navigate("/", { replace: true })}>
         <div id="home-icon">
-          Home <HomeIcon />
+          Home
+          <span id="house-return-btn">
+            <HomeIcon />
+          </span>
         </div>
       </button>
 

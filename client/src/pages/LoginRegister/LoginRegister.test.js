@@ -22,7 +22,7 @@ describe('LoginRegister', () => {
         let btn = screen.getByRole("btn");
         // setRegisterForm
         userEvent.click(btn)
-        expect(btn).toBeInTheDocument()
+        expect(btn).toBeDefined()
     })
 
 

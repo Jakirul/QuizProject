@@ -20,4 +20,11 @@ describe("Results", () => {
     const heading = screen.getByRole("header");
     expect(heading.textContent).toContain("Games Scores:");
   });
+
+  test("QuizResults", () => {
+    let score = screen.getByRole("score");
+    expect(score).toBeInTheDocument()
+  })
+
+
 });
