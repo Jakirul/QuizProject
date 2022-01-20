@@ -1,8 +1,9 @@
 import React from "react";
 import { requestLogin } from "../../redux/actions/action";
 import { useDispatch } from "react-redux";
+import "./Login.css";
 
-function Login() {
+function Login({error}) {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -30,6 +31,9 @@ function Login() {
         <label>Password</label>
         <input required type="password" name="password"></input>
       </div>
+      {error && (
+        <p className="error">{error}</p>
+      )}
       <input type="submit" />
     </form>
   );

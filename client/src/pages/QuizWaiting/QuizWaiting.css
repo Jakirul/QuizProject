@@ -4,34 +4,36 @@
 }
 
 .QuizWaiting > div {
-    border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
-    width: 100%;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
 }
 
 .QuizWaiting > div > div > .nickname {
-    padding: 6px 20px;
-    border: 1px solid gray;
-    border-radius: 0.25em;
+  padding: 6px 20px;
+  border: 1px solid gray;
+  border-radius: 0.25em;
 }
 
-.QuizWaiting > div > input, button {
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
+.QuizWaiting > div > input,
+button {
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
 }
 
 .QuizWaiting > div > form > .message {
-    padding: 6px 20px;
-    border: 1px solid gray;
-    border-radius: 0.25em;
+  padding: 6px 20px;
+  border: 1px solid gray;
+  border-radius: 0.25em;
 }
 
-.QuizWaiting > div > form > input, button {
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
+.QuizWaiting > div > form > input,
+button {
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
 }
 
 .QuizWaiting > div > button {
@@ -41,14 +43,29 @@
 }
 
 @media screen and (max-width: 850px) {
-    .QuizWaiting {
-        flex-direction: column;
-        text-align: center;
-    }
+  .QuizWaiting {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .QuizWaiting > div {
-        margin: 10px 0;
-    }
+  .QuizWaiting > div {
+    margin: 10px 0;
+  }
+}
 
-   
+#remember-msg {
+  text-align: center;
+}
+
+.my-message {
+  color: red;
+}
+
+#message-list {
+  overflow: scroll;
+  height: 50%;
+}
+
+#message-form {
+  height: 20%;
 }

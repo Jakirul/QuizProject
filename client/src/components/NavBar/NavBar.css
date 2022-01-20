@@ -1,46 +1,50 @@
 * {
   box-sizing: border-box;
-  
+  font-family: "Lilita One", cursive;
+  /* border: solid 1px red; */
+  font-weight: 400;
 }
 
 .nav-wrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   background-color: darkslateblue;
   font-size: 18px;
   color: white;
   border-radius: 3px;
-  padding: 10px;
-  margin-top: -8px;
-  font-family:'Lilita One', cursive;
+  padding: 30px;
+  font-family: cursive;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  margin-left: -10px;
+  font-size: 20px;
 }
 .house {
   color: white;
 }
-.person{
+.person {
   color: white;
-  margin-left: 50px;
+  margin-left: 10px;
 }
-.take-back{
-  font-family:'Lilita One', cursive;
+.take-back {
+  font-family: "Lilita One", cursive;
   font-size: 18px;
-  
 }
-
 
 .Home-wrap,
 .account {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  justify-content: center;
 }
 
 .home-icon {
   color: white;
-  margin-left: -8px;
+  margin-left: -10px;
 }
 
 .log-reg {

@@ -3,9 +3,9 @@ import React from "react";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import {store, persistor} from "./redux/store/store.js";
+import { store, persistor } from "./redux/store/store.js";
 // import store from "./redux/store/store.js";
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,24 +1,24 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import playerReducer from "../reducers/playerReducer.js";
 import loggingReducer from "../reducers/loggingReducer.js";
 import { createTransform } from "redux-persist";
-import JSOG from 'jsog'
+import JSOG from "jsog";
 
 export const JSOGTransform = createTransform(
-    (inboundState, key) => JSOG.encode(inboundState),
-    (outboundState, key) => JSOG.decode(outboundState),
-)
+  (inboundState, key) => JSOG.encode(inboundState),
+  (outboundState, key) => JSOG.decode(outboundState)
+);
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: storage,
-  transforms: [JSOGTransform]
-}
+  transforms: [JSOGTransform],
+};
 
-const persistedReducer2 = persistReducer(persistConfig, loggingReducer)
+const persistedReducer2 = persistReducer(persistConfig, loggingReducer);
 
 let store = createStore(
   combineReducers({
@@ -27,8 +27,7 @@ let store = createStore(
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
-let persistor = persistStore(store)
-
+let persistor = persistStore(store);
 
 // const store = createStore(
 //   combineReducers({
@@ -38,5 +37,5 @@ let persistor = persistStore(store)
 //   composeWithDevTools(applyMiddleware(thunk))
 // );
 
-export {store, persistor}
+export { store, persistor };
 // export default store

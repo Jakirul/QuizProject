@@ -4,12 +4,11 @@ import "./QuizJoin.css";
 import { NavBar } from "../../components";
 
 const JoinQuiz = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [result, setResult] = useState();
 
   const joinRoom = async (e) => {
     e.preventDefault();
-
 
     const findLobby = await fetch(
       `http://localhost:3001/exists/${e.target.room.value}`
@@ -18,9 +17,8 @@ const JoinQuiz = () => {
     if (!data.length || data === "Error, cannot find a lobby") {
       setResult(`Cannot find a lobby with the name: ${e.target.room.value}`);
     } else {
-      window.location.href = `http://localhost:3000/room/${e.target.room.value}`;
+      navigate(`/room/${e.target.room.value}`);
     }
-
   };
   return (
     <div className="join" role="join">
@@ -32,7 +30,7 @@ const JoinQuiz = () => {
         <h1>Join Existing Lobby</h1>
 
         <form role="joinForm" className="joinForm" onSubmit={joinRoom}>
-          <input name="room" required placeholder="Enter lobby name here" />
+          <input required name="room" placeholder="Enter lobby name here" />
           <input type="submit" value="Go!" role="go" />
         </form>
 

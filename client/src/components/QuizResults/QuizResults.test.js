@@ -1,21 +1,23 @@
-import {default as QuizResults} from '.'
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'
-import { MemoryRouter } from 'react-router-dom';
+import { default as QuizResults } from ".";
+import { screen, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { store } from "../../redux/store/store.js";
+import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import {store} from "../../redux/store/store.js";
 
-describe('QuizResults', () => {
-    let mockFunction;
-    beforeEach(() => {
-        mockFunction = jest.fn();
-        render(<Provider store={store}><QuizResults /></Provider>, { wrapper: MemoryRouter });
-    });
-
-    test("QuizResults", () => {
-        let score = screen.getByRole("score");
-        expect(score).toBeInTheDocument()
-    })
-
-
-})
+describe("Results", () => {
+  let mockFunction;
+  beforeEach(() => {
+    mockFunction = jest.fn();
+    render(
+      <Provider store={store}>
+        <QuizResults />
+      </Provider>,
+      { wrapper: MemoryRouter }
+    );
+  });
+  test("it renders a title", () => {
+    const heading = screen.getByRole("header");
+    expect(heading.textContent).toContain("Games Scores:");
+  });
+});

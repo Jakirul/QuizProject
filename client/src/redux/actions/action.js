@@ -99,3 +99,9 @@ export const logout = () => {
     type: "LOG_OUT",
   };
 };
+
+export const resetError = () => {
+  return{
+    type: "RESET_ERROR"
+  }
+}
