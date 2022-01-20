@@ -29,7 +29,7 @@ describe("QuizWaiting", () => {
     let waiting = screen.getByRole("sendMessage");
     fireEvent.submit(waiting, {
       preventDefault: jest.fn(),
-      target: { message: "test" },
+      target: { message: { value: "test"} },
     });
     expect(waiting).toBeInTheDocument();
   });
