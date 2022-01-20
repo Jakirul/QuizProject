@@ -118,7 +118,9 @@ function QuizGame() {
 
   return (
     <div role="quiz">
-      <button onClick={exitQuiz}>Exit Quiz</button>
+      <button id="exit-btn" onClick={exitQuiz}>
+        Exit Quiz
+      </button>
 
       <p id="timer">timer: {time}</p>
 

@@ -1,3 +1,11 @@
 .selected-option {
-    background: rgb(149, 185, 218);
+  background: rgb(149, 185, 218);
+}
+
+#submit-btn {
+  background-color: #64d46e;
+}
+
+.question-wrapper {
+  text-align: center;
 }

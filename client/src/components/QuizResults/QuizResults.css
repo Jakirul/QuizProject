@@ -22,3 +22,18 @@
   background-color: #64d46e;
   box-shadow: #29572d 0px 5px;
 }
+
+#home-icon {
+  display: flex;
+  color: #64d46e;
+  background-color: darkslateblue;
+  padding: 10px;
+  padding-left: 8px;
+  border-radius: 10px;
+  color: white;
+}
+
+#house-return-btn {
+  margin-left: -28px;
+  margin-top: 15px;
+}
