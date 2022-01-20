@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { requestLogin, logout } from "../../redux/actions/action.js";
-
-function Register({setError, error}) {
+import "./Register.css";
+function Register({ setError, error }) {
   const dispatch = useDispatch();
   const register = async (e) => {
     e.preventDefault();
@@ -27,10 +27,10 @@ function Register({setError, error}) {
         }
         dispatch(requestLogin(userData));
       } catch (err) {
-        if(err.message === "Username taken"){
-          setError("That username is already taken")
-        } else  {
-          setError("Something went wrong")
+        if (err.message === "Username taken") {
+          setError("That username is already taken");
+        } else {
+          setError("Something went wrong");
         }
         // dispatch(logout());
       }
@@ -42,6 +42,7 @@ function Register({setError, error}) {
         <label>Username</label>
         <input
           required
+          className="login-input"
           type="username"
           name="username"
           maxLength="15"
@@ -54,6 +55,7 @@ function Register({setError, error}) {
         <label>Password</label>
         <input
           required
+          className="login-input"
           id="password"
           type="password"
           name="password"
@@ -67,15 +69,14 @@ function Register({setError, error}) {
         <label>Confirm Password</label>
         <input
           required
+          className="login-input"
           id="confirmPassword"
           type="password"
           name="confirmPassword"
           aria-describedby="confirmPasswordHelp"
         ></input>
       </div>
-      {error && (
-        <p className="error">{error}</p>
-      )}
+      {error && <p className="error">{error}</p>}
       <input type="submit" id="submitButton" />
     </form>
   );

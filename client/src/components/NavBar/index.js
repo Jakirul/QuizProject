@@ -47,19 +47,16 @@ function NavBar() {
                 <div className="log-reg">Login</div>
               </Link>
             )
+          ) : location.pathname.indexOf("/results/") === 0 ? (
+            <div id="empty-div">👏👏</div>
           ) : (
-            <span>
-              <button onClick={() => navigate(-1)}>
-                <span className="back-arrow">
-                  <NavigateBeforeIcon />
-                </span>
-                <div className="take-back">Back</div>
-              </button>
-            </span>
+            <button onClick={() => navigate(-1)}>
+              <div className="take-back">Back</div>
+            </button>
           )}
         </div>
 
-        <span>
+        <span id="inquizitive">
           <ExtensionIcon />
           inQUIZitive
           <ExtensionIcon />
