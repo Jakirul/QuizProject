@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, MemoryRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   retrieveQuizAnswer,
@@ -119,8 +119,10 @@ function QuizGame() {
   return (
     <div role="quiz">
       <button onClick={exitQuiz}>Exit Quiz</button>
+
+      <p id="timer">timer: {time}</p>
+
       <div className="quiz-game-wrap">
-        <p>timer: {time}</p>
         {questions ? (
           <div>
             <h3 id="ques-num">Question Number: {currentQuestion + 1}</h3>
@@ -129,6 +131,7 @@ function QuizGame() {
                 __html: questions[currentQuestion].question,
               }}
             ></h1>
+
             <GameQuizQuestions
               options={questions[currentQuestion].allAnswers}
               disabled={disableQuestion}
@@ -136,15 +139,17 @@ function QuizGame() {
               timer={time}
               reset={resetTimer}
             />
-            {players}
-            {disableQuestion === true ? (
-              questions[currentQuestion].correctAns ===
-              answers[currentQuestion] ? (
-                <p>Correct!</p>
-              ) : (
-                <p>Incorrect!</p>
-              )
-            ) : null}
+            <div className="answers">
+              {players}
+              {disableQuestion === true ? (
+                questions[currentQuestion].correctAns ===
+                answers[currentQuestion] ? (
+                  <p>Correct!</p>
+                ) : (
+                  <p>Incorrect!</p>
+                )
+              ) : null}
+            </div>
           </div>
         ) : null}
 

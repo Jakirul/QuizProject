@@ -3,7 +3,7 @@ const { ObjectId } = require("mongodb");
 
 class User {
   constructor(data) {
-    this.id = data._id;
+    this.id = data.id;
     this.username = data.username;
     this.passwordDigest = data.password_digest;
   }
@@ -25,7 +25,8 @@ class User {
     return new Promise(async (res, rej) => {
       try {
         const userExists = await User.findByUsername(username)
-        if(!userExists){
+
+        if(!userExists.length){
           let db = await init();
           let result = await db
             .collection("users")
@@ -49,8 +50,9 @@ class User {
           .collection("users")
           .find({ username: username })
           .toArray();
-        const user = new User(result[0]);
-        res(user);
+        // const user = new User({...result[0], id: result[0]._id});
+        // console.log("user = ", user)
+        res(result);
       } catch (err) {
         rej(`Error retrieving user: ${err}`);
       }

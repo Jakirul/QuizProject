@@ -117,6 +117,7 @@ function QuizWaiting() {
   }
 
   let players = lobbyPlayers.map((p, i) => {
+    
     let ready;
 
     // If the user is ready, it changes this variable
@@ -125,6 +126,8 @@ function QuizWaiting() {
     } else {
       ready = "(NOT READY)";
     }
+
+  
     return (
       <div key={i}>
         {/* <p>{p.player.username}{ready}</p> */}
