@@ -119,42 +119,44 @@ function QuizGame() {
   return (
     <div role="quiz">
       <button onClick={exitQuiz}>Exit Quiz</button>
-      <p>timer: {time}</p>
-      {questions ? (
-        <div>
-          <h3>Question Number: {currentQuestion + 1}</h3>
-          <h1
-            dangerouslySetInnerHTML={{
-              __html: questions[currentQuestion].question,
-            }}
-          ></h1>
-          <GameQuizQuestions
-            options={questions[currentQuestion].allAnswers}
-            disabled={disableQuestion}
-            setDisabled={setDisableQuestion}
-            timer={time}
-            reset={resetTimer}
-          />
-          {players}
-          {disableQuestion === true ? (
-            questions[currentQuestion].correctAns ===
-            answers[currentQuestion] ? (
-              <p>Correct!</p>
-            ) : (
-              <p>Incorrect!</p>
-            )
-          ) : null}
-        </div>
-      ) : null}
+      <div className="quiz-game-wrap">
+        <p>timer: {time}</p>
+        {questions ? (
+          <div>
+            <h3>Question Number: {currentQuestion + 1}</h3>
+            <h1
+              dangerouslySetInnerHTML={{
+                __html: questions[currentQuestion].question,
+              }}
+            ></h1>
+            <GameQuizQuestions
+              options={questions[currentQuestion].allAnswers}
+              disabled={disableQuestion}
+              setDisabled={setDisableQuestion}
+              timer={time}
+              reset={resetTimer}
+            />
+            {players}
+            {disableQuestion === true ? (
+              questions[currentQuestion].correctAns ===
+              answers[currentQuestion] ? (
+                <p>Correct!</p>
+              ) : (
+                <p>Incorrect!</p>
+              )
+            ) : null}
+          </div>
+        ) : null}
 
-      <label htmlFor="progress-bar">Your game progress: </label>
-      {questions && (
-        <progress
-          id="progress-bar"
-          value={currentQuestion}
-          max={questions.length}
-        ></progress>
-      )}
+        <label htmlFor="progress-bar">Your game progress: </label>
+        {questions && (
+          <progress
+            id="progress-bar"
+            value={currentQuestion}
+            max={questions.length}
+          ></progress>
+        )}
+      </div>
     </div>
   );
 }
