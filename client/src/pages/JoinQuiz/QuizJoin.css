@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+h1 {
+    padding-top: 10px;
+    font-family: 'Lilita One', cursive;
+    font-stretch: expanded;
+}
+
+.inner-joinquiz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background-color: rgb(236, 236, 236);
+    border: solid 0.5px lightgrey;
+    border-radius: 10px;
+    padding: 80px 50px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form > * {
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+}
+
+input {
+    border: 1px solid rgb(90, 90, 90);
+    border-radius: 20px;
+}
+
+input[type=submit] {
+    border: 1px solid #64d46e;
+    background-color: #64d46e;
+    border-radius: 10px;
+    box-shadow: #29572d 0px 5px;
+    font-weight: 600;
+}

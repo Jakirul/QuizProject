@@ -25,11 +25,9 @@ const JoinQuiz = () => {
   return (
     <div>
       <NavBar />
-      <button className="back" onClick={() => history(-1)}>
+      {/* <button className="back" onClick={() => history(-1)}>
         Go back
-      </button>
-
-
+      </button> */}
       <div className="inner-joinquiz">
         <h1>Join Existing Lobby</h1>
 

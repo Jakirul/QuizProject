@@ -8,8 +8,8 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-import playerReducer from "../reducers/playerReducer.js";
-import loggingReducer from "../reducers/loggingReducer.js";
+import playerReducer from "../redux/reducers/playerReducer";
+import loggingReducer from "../redux/reducers/loggingReducer";
 
 const TestProviders = ({ initState, initState2 }) => {
   initState ||= { playerList: [], answerList: [] };

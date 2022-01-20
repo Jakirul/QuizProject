@@ -26,9 +26,7 @@ function QuizWaiting() {
   const [message, setMessage] = useState([]);
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
-  const socketConnection = useSelector(
-    (state) => state.player.socketConnection
-  );
+  const socketConnection = useSelector((state) => state.player.socketConnection);
 
   useEffect(() => {
     dispatch(socketConnections({ socketConnect }));
@@ -76,6 +74,7 @@ function QuizWaiting() {
         }
       );
     }
+
   }, [socketConnection]);
 
   useEffect(() => {
@@ -88,20 +87,23 @@ function QuizWaiting() {
     }
   }, [lobbyPlayers]);
 
+  
   const editUsername = async (e) => {
-    const username = await fetch(`http://localhost:3001/user/${nickname}`);
+    const username = await fetch(`http://localhost:3001/user/${nickname}`)
     const data = await username.json();
 
     function userExists(username) {
-      return lobbyPlayers.some(function (el) {
-        return el.player.username === username;
-      });
+        return lobbyPlayers.some(function(el) {
+            return el.player.username === username;
+        }); 
     }
 
-    if (data.status === false || userExists(nickname)) return;
-
+    if (data.status === false || userExists(nickname)) return
+ 
     socketConnection.socketConnect.emit("username", nickname);
+
   };
+
 
   function togglereadyPlayers() {
     socketConnection.socketConnect.emit(
@@ -189,6 +191,7 @@ function QuizWaiting() {
                 <input
                   type="text"
                   onChange={(e) => setNickname(e.target.value)}
+                  className="nickname"
                   required
                 />
                 <button onClick={editUsername}>Change Username</button>

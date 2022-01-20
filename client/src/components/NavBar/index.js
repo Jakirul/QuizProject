@@ -25,6 +25,14 @@ function NavBar() {
     }
   });
 
+  useEffect(()=>{
+    if (location.pathname === '/' || location.pathname === '/QuizPage') {
+      if (socketConnection !== undefined) {
+        socketConnection.socketConnect.disconnect(); 
+      }
+    }
+  });
+
   return (
     <div>
       <nav className="nav-wrap">
@@ -35,12 +43,13 @@ function NavBar() {
         </div>
         <span>
           <ExtensionIcon />
-          inQUIZitive
+           inQUIZitive 
           <ExtensionIcon />
         </span>
         <div className="account">
           {location.pathname === "/" ? (
             localStorage.getItem("token") ? (
+              
               <button
                 onClick={() => {
                   dispatch(logout);

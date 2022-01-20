@@ -31,8 +31,8 @@ async function setGame(req, res) {
 
 async function setAnswer(req, res) {
   try {
-    const { socketId, gameId } = req.params;
-    const score = await Game.setAnswer(socketId, gameId, req.body);
+    const { socketId, gameId, loggedIn } = req.params;
+    const score = await Game.setAnswer(socketId, gameId, req.body, loggedIn);
     res.status(200).json(score);
   } catch (e) {
     res.status(500).send({ e: "Cannot set the answers!" });
@@ -78,16 +78,6 @@ async function showLeaderboard(req, res) {
   }
 }
 
-async function logScore(req, res) {
-  try {
-    const { username, score } = req.params;
-    const result = await Game.logScore(username, score);
-    res.status(200).json(result);
-  } catch (e) {
-    res.status(500).send({ e: "Cannot log the score!" });
-  }
-}
-
 module.exports = {
   home,
   scoreAdder,
@@ -96,6 +86,5 @@ module.exports = {
   getGameResults,
   lobbyExists,
   getGameId,
-  showLeaderboard,
-  logScore,
+  showLeaderboard
 };
