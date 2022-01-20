@@ -45,7 +45,6 @@ function QuizSelect() {
       );
       const gameId = await r.json();
 
-      console.log(gameId);
       navigate(`/room/${gameId}`);
 
       if (gameId.err) {

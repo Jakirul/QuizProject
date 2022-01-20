@@ -11,7 +11,6 @@ function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption);
 
   const handleSubmit = () => {
     socketConnection.socketConnect.emit(

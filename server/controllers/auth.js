@@ -25,7 +25,6 @@ async function login(req, res) {
       throw new Error("No user with this username");
     }
     const authed = await bcrypt.compare(req.body.password, user.passwordDigest);
-    console.log(authed);
     if (!!authed) {
       const payload = { id: user.id, username: user.username };
       const sendToken = (err, token) => {
@@ -44,7 +43,6 @@ async function login(req, res) {
 
     }
   } catch (err) {
-    console.log(err);
     res.status(401).json({ err: "Error logging in" });
   }
 }

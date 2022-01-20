@@ -16,7 +16,6 @@ export const retrieveQuizAnswer = (quizId) => {
         `http://localhost:3001/quizAnswers/${quizId}`
       );
       const questions = await quizData.json();
-      console.log("quz", questions)
 
       dispatch({
         type: "RETRIEVE_QUES",
@@ -75,9 +74,8 @@ export const requestLogin = (userData) => {
       };
       const r = await fetch(`http://localhost:3001/login`, options);
       const data = await r.json();
-      console.log(data);
+
       if (!data.success) {
-        console.log("error ");
         dispatch({
           type: "ERROR",
           payload: "Login not authorised",

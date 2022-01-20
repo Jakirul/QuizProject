@@ -22,7 +22,6 @@ class Game {
   }
 
   static scoreAdder(username, userScore) {
-    console.log("USERNAME = ", username, userScore)
     return new Promise(async (resolve, reject) => {
       try {
         let db = await init();
@@ -55,7 +54,6 @@ class Game {
   }
 
   static setAnswer(socketId, gameId, body, loggedIn) {
-    console.log(body)
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
@@ -89,11 +87,6 @@ class Game {
        
 
         // If a score is more than 0, then it will append it to the leaderboard
-        console.log(typeof(loggedIn))
-        console.log(loggedIn)
-        console.log()
-        console.log()
-        console.log()
         if (scoreKeeper > 0 && loggedIn === "true") {
           Game.scoreAdder(body.username, scoreKeeper);
         }

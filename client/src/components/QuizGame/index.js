@@ -19,7 +19,6 @@ function QuizGame() {
     (state) => state.player.socketConnection
   );
   const answers = useSelector((state) => state.player.answerList);
-  console.log("answers = ", answers)
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
@@ -48,7 +47,6 @@ function QuizGame() {
   }, []);
 
   useEffect(() => {
-    console.log("rerender");
     if (lobbyPlayers.length > 0) {
       if (lobbyPlayers.every((player) => player.userReady === true)) {
         if (currentQuestion < questions.length - 1) {

@@ -8,7 +8,6 @@ function QuizResults() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log("is logged in", isLoggedIn)
   const currentUser = useSelector((state) => state.auth.currentUser);
 
   async function fetchResults() {

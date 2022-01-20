@@ -20,7 +20,7 @@ import './style.css'
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const currentUser = useSelector((state) => state.auth.currentUser.username)
-  console.log(isLoggedIn, currentUser)
+  
   useEffect(() => {
     if (!isLoggedIn) {
       localStorage.clear()
