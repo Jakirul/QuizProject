@@ -20,6 +20,12 @@ describe("NavBar", () => {
         let div = screen.getByRole('nav')
         expect(div).toBeInTheDocument();
     })
+
+    test("it renders", () => {
+      render(<NavBar />);
+      const navigation = screen.getByRole("navigation");
+      expect(navigation.textContent).toMatch(/nav-wrap/i);
+  });
 });
 
 // describe("NavBar", () => {
