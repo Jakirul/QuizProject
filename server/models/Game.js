@@ -70,21 +70,20 @@ class Game {
           playerAns: body.answers[index],
         }));
 
-        const difficulty = answersResults[0].difficulty
+        const difficulty = answersResults[0].difficulty;
         let difficultyPoints;
 
-        if(difficulty==='hard'){
-          difficultyPoints=4
-        } else if (difficulty==='medium'){
-          difficultyPoints=2
+        if (difficulty === "hard") {
+          difficultyPoints = 4;
+        } else if (difficulty === "medium") {
+          difficultyPoints = 2;
         } else {
-          difficultyPoints=1
+          difficultyPoints = 1;
         }
-        
+
         const scoreKeeper =
           resultMap.filter((result) => result.playerCorrAns === true).length *
           difficultyPoints;
-       
         // If a score is more than 0, then it will append it to the leaderboard
         if (scoreKeeper > 0 && loggedIn === "true") {
           Game.scoreAdder(body.username, scoreKeeper);
@@ -167,7 +166,7 @@ class Game {
         const newGame = await db
           .collection("games")
           .insertOne({ questions: questionList });
-        
+
         resolve(newGame.insertedId);
       } catch (err) {
         reject(`Cannot set a game: ${err.message}`);
@@ -194,7 +193,9 @@ class AllQuestions {
     this.questions = data.questions.results.map((list) => ({
       category: list.category,
       question: list.question,
-      allAnswers: list.incorrect_answers.concat([list.correct_answer]).sort(() => Math.random() - 0.5),
+      allAnswers: list.incorrect_answers
+        .concat([list.correct_answer])
+        .sort(() => Math.random() - 0.5),
       correctAns: list.correct_answer,
       difficulty: list.difficulty,
     }));

@@ -3,7 +3,7 @@ import { requestLogin } from "../../redux/actions/action";
 import { useDispatch } from "react-redux";
 import "./Login.css";
 
-function Login({error}) {
+function Login({ error }) {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -21,6 +21,7 @@ function Login({error}) {
       <div>
         <label>Username</label>
         <input
+          className="login-input"
           required
           type="text"
           name="username"
@@ -30,11 +31,14 @@ function Login({error}) {
       </div>
       <div>
         <label>Password</label>
-        <input required type="password" name="password"></input>
+        <input
+          required
+          type="password"
+          name="password"
+          className="login-input"
+        ></input>
       </div>
-      {error && (
-        <p className="error">{error}</p>
-      )}
+      {error && <p className="error">{error}</p>}
       <input type="submit" />
     </form>
   );

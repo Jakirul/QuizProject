@@ -1,4 +1,11 @@
 .login-input {
-    width: 250px;
-    margin: 0 auto;
+  width: 250px;
+  margin-left: -10px;
+  font-size: 20px;
+}
+
+#login-form {
+  margin-top: 60px;
+  padding-top: 50px;
+  padding-bottom: 60px;
 }

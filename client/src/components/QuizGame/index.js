@@ -141,7 +141,7 @@ function QuizGame() {
               timer={time}
               reset={resetTimer}
             />
-            <div>
+            <div id="players">
               {players}
               {disableQuestion === true ? (
                 questions[currentQuestion].correctAns ===

@@ -196,7 +196,7 @@ function QuizWaiting() {
   });
 
   return (
-    <div role="waiting">
+    <div id="waiting" role="waiting">
       <NavBar />
       <p id="remember-msg">
         Remember: if you're not logged in, your score won't be counted on the
@@ -205,39 +205,33 @@ function QuizWaiting() {
       <div className="QuizWaiting">
         {!result ? (
           <div>
-            
-
             <div className="share-buttons">
-            <TwitterShareButton
-              children={<TwitterIcon size={32} round={true} />}
-              url={`http://localhost:3001/room/${id}`}
-              title="Join my game!"
-            />
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(
-                  `http://localhost:3000/room/${id}`
-                );
-                setCopiedURL(true);
-              }}
-            >
-              Copy URL
-            </button>
-            {copiedURL && <div>URL copied to clipboard!</div>}
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(`${id}`);
-                setCopiedCode(true);
-              }}
-            >
-              Copy Code
-            </button>
-            {copiedCode && <div>Code copied to clipboard!</div>}
-
+              <TwitterShareButton
+                children={<TwitterIcon size={32} round={true} />}
+                url={`http://localhost:3001/room/${id}`}
+                title="Join my game!"
+              />
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `http://localhost:3000/room/${id}`
+                  );
+                  setCopiedURL(true);
+                }}
+              >
+                Copy URL
+              </button>
+              {copiedURL && <div>URL copied to clipboard!</div>}
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(`${id}`);
+                  setCopiedCode(true);
+                }}
+              >
+                Copy Code
+              </button>
+              {copiedCode && <div>Code copied to clipboard!</div>}
             </div>
-
-
-
             {!username ? (
               <div>
                 <input
@@ -269,9 +263,14 @@ function QuizWaiting() {
 
         <div>
           <main id="message-list">{messageList}</main>
-          <h3>Write a message...</h3>
           <form id="message-form" onSubmit={sendMessage} role="sendMessage">
-            <input name="message" required minLength="1" maxLength="100" />
+            <input
+              name="message"
+              required
+              minLength="1"
+              maxLength="100"
+              placeholder="Write a message..."
+            />
             <input type="submit" />
           </form>
         </div>
