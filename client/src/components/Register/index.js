@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { requestLogin, logout } from "../../redux/actions/action.js";
 
-function Register() {
+function Register({setError, error}) {
   const dispatch = useDispatch();
-  const [confirmError, setConfirmError] = useState(false);
-
   const register = async (e) => {
     e.preventDefault();
     const form = e.target;
     if (form.password.value !== form.confirmPassword.value) {
-      setConfirmError(true);
+      setError("Please make sure your passwords match");
     } else {
       try {
         const userData = {
@@ -29,8 +27,13 @@ function Register() {
         }
         dispatch(requestLogin(userData));
       } catch (err) {
-        console.warn(err);
-        dispatch(logout());
+        console.log(err);
+        if(err.Error === "Username taken"){
+          setError("That username is already taken")
+        } else  {
+          setError("Something went wrong")
+        }
+        // dispatch(logout());
       }
     }
   };
@@ -71,8 +74,8 @@ function Register() {
           aria-describedby="confirmPasswordHelp"
         ></input>
       </div>
-      {confirmError && (
-        <p className="error">Please make sure your passwords match</p>
+      {error && (
+        <p className="error">{error}</p>
       )}
       <input type="submit" id="submitButton" />
     </form>

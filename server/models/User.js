@@ -24,12 +24,17 @@ class User {
   static create({ username, password }) {
     return new Promise(async (res, rej) => {
       try {
-        let db = await init();
-        let result = await db
-          .collection("users")
-          .insertOne({ username: username, password_digest: password });
-        // let newUser = new User(result);
-        res(result);
+        const userExists = await User.findByUsername(username)
+        if(!userExists){
+          let db = await init();
+          let result = await db
+            .collection("users")
+            .insertOne({ username: username, password_digest: password });
+          // let newUser = new User(result);
+          res(result);
+        } else {
+          rej('Username taken')
+        }
       } catch (err) {
         rej(`Error creating user: ${err}`);
       }
