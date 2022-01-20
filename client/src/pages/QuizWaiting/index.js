@@ -46,16 +46,14 @@ function QuizWaiting() {
     e.preventDefault();
     let message = e.target.message.value;
     socketConnection.socketConnect.emit("message", { nickname, message });
+    e.target.message.value = ""
   };
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1000);
     if (socketConnection !== undefined) {
       if (username) {
-        socketConnection.socketConnect.emit(
-          "username",
-          username
-        );
+        socketConnection.socketConnect.emit("username", username );
         setNickname(username);
       } else {
         socketConnection.socketConnect.emit(
@@ -114,6 +112,7 @@ function QuizWaiting() {
   }
 
   let players = lobbyPlayers.map((p, i) => {
+    
     let ready;
 
     // If the user is ready, it changes this variable
@@ -122,11 +121,13 @@ function QuizWaiting() {
     } else {
       ready = "(NOT READY)";
     }
+
+  
     return (
       <div key={i}>
-        <p>
-          <b>{p.player.username}</b> {ready}
-        </p>
+        {/* <p>{p.player.username}{ready}</p> */}
+        {nickname === p.player.username ? <p style={{color: "red", fontWeight: "bold"}}>{p.player.username}{ready}</p> :<p>{p.player.username}{ready}</p>}
+        
       </div>
     );
   });
@@ -215,7 +216,7 @@ function QuizWaiting() {
         <div>
           <h3>Write a message...</h3>
           <form onSubmit={sendMessage} role="sendMessage">
-            <input name="message" required />
+            <input name="message" required minLength="1" maxLength="100" />
             <input type="submit" />
           </form>
 

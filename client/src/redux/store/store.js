@@ -17,14 +17,12 @@ const persistConfig = {
   storage: storage,
   transforms: [JSOGTransform]
 }
- 
-const persistedReducer = persistReducer(persistConfig, playerReducer)
-const persistedReducer2 = persistReducer(persistConfig, loggingReducer)
 
+const persistedReducer2 = persistReducer(persistConfig, loggingReducer)
 
 let store = createStore(
   combineReducers({
-    player: persistedReducer,
+    player: playerReducer,
     auth: persistedReducer2,
   }),
   composeWithDevTools(applyMiddleware(thunk))
@@ -41,4 +39,4 @@ let persistor = persistStore(store)
 // );
 
 export {store, persistor}
-export default store
+// export default store
