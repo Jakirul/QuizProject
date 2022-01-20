@@ -60,3 +60,12 @@ button {
 .my-message {
   color: red;
 }
+
+#message-list {
+  overflow: scroll;
+  height: 50%;
+}
+
+#message-form {
+  height: 20%;
+}

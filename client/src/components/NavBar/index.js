@@ -50,17 +50,16 @@ function NavBar() {
             ) : (
               <Link to="/LoginRegister">
                 <span className="person">
-                  {" "}
-                  <AccountCircleIcon />{" "}
+                  <AccountCircleIcon />
                 </span>
-                <div className="log-reg">Login / Register</div>
+                <div className="log-reg">Login</div>
               </Link>
             )
           ) : (
             <span>
               <button onClick={() => navigate(-1)}>
                 <span className="back-arrow">
-                  <NavigateBeforeIcon />{" "}
+                  <NavigateBeforeIcon />
                 </span>
                 <div className="take-back">Back</div>
               </button>

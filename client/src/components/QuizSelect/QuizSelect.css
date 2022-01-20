@@ -1,11 +1,18 @@
 .QuizSelection {
   /* display: flex; */
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
 }
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-color: black;
+  padding: 20px;
 }
 h1 {
   text-align: center;
