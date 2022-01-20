@@ -21,12 +21,13 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const user = await User.findByUsername(req.body.username);
-    if (!user) {
+    if (!user.length) {
       throw new Error("No user with this username");
     }
-    const authed = await bcrypt.compare(req.body.password, user.passwordDigest);
+    const authed = await bcrypt.compare(req.body.password, user[0].password_digest);
+    
     if (!!authed) {
-      const payload = { id: user.id, username: user.username };
+      const payload = { id: user[0].id, username: user[0].username };
       const sendToken = (err, token) => {
         if (err) {
           throw new Error("Error in token generation");

@@ -64,8 +64,10 @@ button {
 }
 
 #message-list {
-  overflow: scroll;
-  height: 50%;
+  overflow: auto;
+  display:flex;
+  flex-direction: column-reverse;
+  height: 100px;
 }
 
 #message-form {

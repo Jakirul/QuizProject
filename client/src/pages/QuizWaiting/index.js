@@ -51,8 +51,8 @@ function QuizWaiting() {
     let message = e.target.message.value;
     socketConnection.socketConnect.emit("message", { nickname, message });
     setMessage((prevState) => [
-      ...prevState,
       { nickname: nickname, message: message, me: true },
+      ...prevState,
     ]);
 
     e.target.message.value = "";
@@ -76,8 +76,8 @@ function QuizWaiting() {
         "receive-message",
         (nickname, message) => {
           setMessage((prevState) => [
-            ...prevState,
             { nickname: nickname, message: message },
+            ...prevState,
           ]);
         }
       );
@@ -117,6 +117,7 @@ function QuizWaiting() {
   }
 
   let players = lobbyPlayers.map((p, i) => {
+    
     let ready;
 
     // If the user is ready, it changes this variable
@@ -125,6 +126,8 @@ function QuizWaiting() {
     } else {
       ready = "(NOT READY)";
     }
+
+  
     return (
       <div key={i}>
         {/* <p>{p.player.username}{ready}</p> */}

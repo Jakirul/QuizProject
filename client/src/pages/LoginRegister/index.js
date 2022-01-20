@@ -37,11 +37,12 @@ function LoginRegister() {
             <Login error={errorMessage} />
             <button
               id="got-account"
-              onClick={() =>
-                setRegisterForm((showRegisterForm) => !showRegisterForm)
+              onClick={() => {
+                setRegisterForm((showRegisterForm) => !showRegisterForm);
                 dispatch(resetError())
               }
               }
+
               role="btn"
             >
               Haven't got an account?
