@@ -27,8 +27,7 @@ function Register({setError, error}) {
         }
         dispatch(requestLogin(userData));
       } catch (err) {
-        console.log(err);
-        if(err.Error === "Username taken"){
+        if(err.message === "Username taken"){
           setError("That username is already taken")
         } else  {
           setError("Something went wrong")

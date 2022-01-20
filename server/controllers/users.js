@@ -18,7 +18,7 @@ async function all (req, res) {
 async function findByUsername (req, res) {
     try {
         const user = await User.findByUsername(req.params.username)
-        if(!user){
+        if(!user.length){
             res.status(200).json({status: true})
         } else {
             res.status(200).json({status: false})

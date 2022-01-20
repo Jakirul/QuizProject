@@ -18,7 +18,6 @@ function LoginRegister() {
   }, [])
 
   useEffect(() => {
-    console.log(error)
     setErrorMessage(error)
   }, [error])
 
