@@ -35,9 +35,13 @@ io.on("connection", (socket) => {
       );
     });
 
-    socket.on("message", ({ nickname, message }) => {
-      console.log(nickname, message);
-      socket.broadcast.to(roomId).emit("receive-message", nickname, message);
+    socket.on("message", ({ nicknameChosen, message }) => {
+      console.log()
+      console.log()
+      console.log()
+      console.log()
+      console.log(nicknameChosen, message);
+      socket.broadcast.to(roomId).emit("receive-message", nicknameChosen, message);
     });
 
     //handle ready function

@@ -80,9 +80,9 @@ function QuizWaiting() {
 
       socketConnection.socketConnect.on(
         "receive-message",
-        (nickname, message) => {
+        (nicknameChosen, message) => {
           setMessage((prevState) => [
-            { nickname: nickname, message: message },
+            { nickname: nicknameChosen, message: message },
             ...prevState,
           ]);
         }
