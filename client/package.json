@@ -12,7 +12,6 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "jest-fetch-mock": "^3.0.3",
     "jsog": "^1.0.7",
     "jwt-decode": "^3.1.2",
@@ -32,9 +31,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --setupFilesAfterEnv ./src/tests/setupTests.js",
+    "test": "react-scripts test --setupFilesAfterEnv ./src/tests/setupTests.js --watchAll --testPathIgnorePatterns=ignore --env=jsdom",
     "coverage": "npm test -- --coverage",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "redux",
+      "App.js",
+      "src/index.js"
+    ]
   },
   "eslintConfig": {
     "extends": [

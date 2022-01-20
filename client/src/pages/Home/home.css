@@ -1,13 +1,8 @@
 * {
   box-sizing: border-box;
- 
-  
 }
 .home {
-
-  
-background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-  
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 .button {
   padding: 50px;
@@ -20,9 +15,7 @@ background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
   box-shadow: 5px 5px #888888;
   cursor: pointer;
   font-size: 20px;
-  font-family:'Lilita One', cursive;
-
-  
+  font-family: "Lilita One", cursive;
 }
 
 .button-stack {
@@ -31,22 +24,21 @@ background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
-  
 }
 
 .button-stack > a {
   text-decoration: none;
-
+  margin-bottom: 20px;
 }
 
 #welcome {
   text-align: center;
   margin-top: 40px;
   background-color: rgb(68, 184, 68);
-  
+
   color: black;
   font-size: 30px;
   padding: 15px;
   border-radius: 10px;
-  font-family:'Lilita One', cursive;
+  font-family: "Lilita One", cursive;
 }

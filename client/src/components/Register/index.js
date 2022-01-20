@@ -1,53 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { requestLogin, logout } from "../../redux/actions/action.js";
 
 function Register() {
   const dispatch = useDispatch();
+  const [confirmError, setConfirmError] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
     const form = e.target;
-    try {
-      const userData = {
-        username: form.username.value,
-        email: form.email.value,
-        password: form.password.value,
-      };
-      const options = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      };
-      const r = await fetch(`http://localhost:3001/register`, options);
-      const data = await r.json();
-      if (data.err) {
-        throw Error(data.err);
+    if (form.password.value !== form.confirmPassword.value) {
+      setConfirmError(true);
+    } else {
+      try {
+        const userData = {
+          username: form.username.value,
+          password: form.password.value,
+        };
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        };
+        const r = await fetch(`http://localhost:3001/register`, options);
+        const data = await r.json();
+        if (data.err) {
+          throw Error(data.err);
+        }
+        dispatch(requestLogin(userData));
+      } catch (err) {
+        console.warn(err);
+        dispatch(logout());
       }
-      dispatch(requestLogin(userData));
-    } catch (err) {
-      console.warn(err);
-      dispatch(logout());
     }
   };
   return (
     <form id="register-form" role="register" onSubmit={register}>
-      <div>
-        <label>Email address</label>
-        <input
-          required
-          type="email"
-          name="email"
-          aria-describedby="emailHelp"
-        ></input>
-      </div>
       <div>
         <label>Username</label>
         <input
           required
           type="username"
           name="username"
+          maxLength="15"
+          minLength="3"
           aria-describedby="usernameHelp"
+          required
         ></input>
       </div>
       <div>
@@ -57,19 +55,25 @@ function Register() {
           id="password"
           type="password"
           name="password"
+          maxLength="20"
+          minLength="4"
           aria-describedby="passwordHelp"
+          required
         ></input>
       </div>
       <div>
-        <label>Password</label>
+        <label>Confirm Password</label>
         <input
           required
-          id="confirm-password"
+          id="confirmPassword"
           type="password"
-          name="confirm-password"
+          name="confirmPassword"
           aria-describedby="confirmPasswordHelp"
         ></input>
       </div>
+      {confirmError && (
+        <p className="error">Please make sure your passwords match</p>
+      )}
       <input type="submit" id="submitButton" />
     </form>
   );

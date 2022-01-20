@@ -22,7 +22,7 @@ function QuizGame() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(20);
   const [isActive, setIsActive] = useState(true);
 
   const resetTimer = () => {
@@ -55,7 +55,7 @@ function QuizGame() {
             setDisableQuestion(false);
             setCurrentQuestion(currentQuestion + 1);
             resetTimer();
-            setTime(10);
+            setTime(20);
             setIsActive(true);
             // socketConnection.socketConnect.emit('reset')
             // socketConnection.socketConnect.emit('timer')
@@ -86,7 +86,7 @@ function QuizGame() {
             options
           );
 
-          setTimeout(() => navigate(`/results/${id}`), 2000);
+          setTimeout(() => navigate(`/results/${id}`, { replace: true }), 2000);
           dispatch(unreadyPlayers());
         }
       }
@@ -158,6 +158,5 @@ function QuizGame() {
     </div>
   );
 }
-
 
 export default QuizGame;

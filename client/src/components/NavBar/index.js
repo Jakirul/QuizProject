@@ -25,10 +25,10 @@ function NavBar() {
     }
   });
 
-  useEffect(()=>{
-    if (location.pathname === '/' || location.pathname === '/QuizPage') {
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "/QuizPage") {
       if (socketConnection !== undefined) {
-        socketConnection.socketConnect.disconnect(); 
+        socketConnection.socketConnect.disconnect();
       }
     }
   });
@@ -36,20 +36,9 @@ function NavBar() {
   return (
     <div role="nav">
       <nav className="nav-wrap">
-        <div className="Home-wrap">
-          <Link to="/">
-            <span className="house"><HomeIcon /> </span> <div className="home-icon">Home </div> 
-          </Link>
-        </div>
-        <span>
-          <ExtensionIcon />
-           inQUIZitive 
-          <ExtensionIcon /> 
-        </span>
         <div className="account">
           {location.pathname === "/" ? (
             localStorage.getItem("token") ? (
-              
               <button
                 onClick={() => {
                   dispatch(logout);
@@ -60,17 +49,38 @@ function NavBar() {
               </button>
             ) : (
               <Link to="/LoginRegister">
-                <span className="person">  <AccountCircleIcon /> </span>
+                <span className="person">
+                  {" "}
+                  <AccountCircleIcon />{" "}
+                </span>
                 <div className="log-reg">Login / Register</div>
               </Link>
             )
           ) : (
             <span>
               <button onClick={() => navigate(-1)}>
-                <span className="back-arrow"><NavigateBeforeIcon /> </span><div className="take-back">Back</div>
+                <span className="back-arrow">
+                  <NavigateBeforeIcon />{" "}
+                </span>
+                <div className="take-back">Back</div>
               </button>
             </span>
           )}
+        </div>
+
+        <span>
+          <ExtensionIcon />
+          inQUIZitive
+          <ExtensionIcon />
+        </span>
+
+        <div className="Home-wrap">
+          <Link to="/">
+            <span className="house">
+              <HomeIcon />
+            </span>
+            <div className="home-icon">Home </div>
+          </Link>
         </div>
       </nav>
     </div>
