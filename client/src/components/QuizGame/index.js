@@ -123,7 +123,7 @@ function QuizGame() {
         <p>timer: {time}</p>
         {questions ? (
           <div>
-            <h3>Question Number: {currentQuestion + 1}</h3>
+            <h3 id="ques-num">Question Number: {currentQuestion + 1}</h3>
             <h1
               dangerouslySetInnerHTML={{
                 __html: questions[currentQuestion].question,
