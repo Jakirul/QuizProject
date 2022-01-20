@@ -205,6 +205,9 @@ function QuizWaiting() {
       <div className="QuizWaiting">
         {!result ? (
           <div>
+            
+
+            <div className="share-buttons">
             <TwitterShareButton
               children={<TwitterIcon size={32} round={true} />}
               url={`http://localhost:3001/room/${id}`}
@@ -230,6 +233,11 @@ function QuizWaiting() {
               Copy Code
             </button>
             {copiedCode && <div>Code copied to clipboard!</div>}
+
+            </div>
+
+
+
             {!username ? (
               <div>
                 <input
