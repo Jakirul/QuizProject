@@ -51,6 +51,10 @@
 .log-reg {
   color: white;
 }
+
+.back-btn {
+  border-radius: 10px;
+}
 span {
   display: flex;
   flex-direction: row;

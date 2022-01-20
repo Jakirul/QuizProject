@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import store from "../../redux/store/store";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { resetAnswer } from "../../redux/actions/action";
 import "./QuizResults.css";
 import HomeIcon from "@mui/icons-material/Home";
 
 function QuizResults() {
   const [results, setResults] = useState({});
   const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const currentUser = useSelector((state) => state.auth.currentUser);
+
+  useEffect(() => {
+    dispatch(resetAnswer());
+  }, []);
 
   async function fetchResults() {
     const response = await fetch(`http://localhost:3001/results/${id}`);
@@ -25,21 +28,6 @@ function QuizResults() {
         [data.username]: data.scoreKeeper,
       }));
     });
-
-    // if (isLoggedIn) {
-    //   console.log("here")
-    //   const options = {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json",
-    //                 "Authorization": localStorage.getItem('token') },
-    //   };
-    //   await fetch(
-    //     `http://localhost:3001/${currentUser.username}/${
-    //       data[currentUser.username]
-    //     }`,
-    //     options
-    //   );
-    // }
   }
 
   const playerResults = Object.keys(results).map((r) => {

@@ -40,6 +40,10 @@ export const userAnswer = (quizAnswer) => ({
   payload: quizAnswer,
 });
 
+export const resetAnswer = () => ({
+  type: "RESET_ANSWER",
+});
+
 export const incrementPlayer = (incrementPlayer) => ({
   type: "INCREMENT_PLAYER",
   payload: incrementPlayer,
@@ -100,7 +104,7 @@ export const logout = () => {
 };
 
 export const resetError = () => {
-  return{
-    type: "RESET_ERROR"
-  }
-}
+  return {
+    type: "RESET_ERROR",
+  };
+};

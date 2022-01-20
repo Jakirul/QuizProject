@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./NavBar.css";
@@ -10,7 +10,6 @@ import { Login } from "../Login";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/action.js";
 function NavBar() {
- 
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -20,20 +19,11 @@ function NavBar() {
 
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/QuizPage") {
-      if (socketConnection !== undefined ) {
-        socketConnection.socketConnect.disconnect(true);
-      }
-    }
-  }, []);
-
-
-  useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "/QuizPage") {
       if (socketConnection !== undefined) {
         socketConnection.socketConnect.disconnect();
       }
     }
-  });
+  }, []);
 
   return (
     <div role="nav">
