@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { resetAnswer } from "../../redux/actions/action";
 import "./QuizResults.css";
 import HomeIcon from "@mui/icons-material/Home";
+import NavBar from "../NavBar";
 
 function QuizResults() {
   const [results, setResults] = useState({});
@@ -44,6 +45,7 @@ function QuizResults() {
 
   return (
     <div role="score">
+      <NavBar />
       <button onClick={() => navigate("/", { replace: true })}>
         <div id="home-icon">
           Home

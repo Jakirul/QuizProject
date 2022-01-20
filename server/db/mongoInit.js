@@ -1,17 +1,20 @@
-const { MongoClient } = require('mongodb')
+const { MongoClient } = require("mongodb");
 
 const init = async () => {
   const uri = `mongodb://user:pass@db:27017`;
-  const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
- 
-  let dbName = process.env.NODE_ENV == "test" ? "quiz_dbtest": "quiz_db";
+  const mongoClient = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  let dbName = process.env.NODE_ENV == "test" ? "quiz_dbtest" : "quiz_db";
   try {
-      let client = await mongoClient.connect();
-      return client.db(dbName);
+    let client = await mongoClient.connect();
+    return client.db(dbName);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
-}
+};
 
 module.exports = { init };
 
@@ -25,6 +28,5 @@ module.exports = { init };
 //   console.log('connected to database!', dbName)
 //   return client.db(dbName)
 // }
-
 
 // module.exports = { init };

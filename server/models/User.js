@@ -24,9 +24,9 @@ class User {
   static create({ username, password }) {
     return new Promise(async (res, rej) => {
       try {
-        const userExists = await User.findByUsername(username)
+        const userExists = await User.findByUsername(username);
 
-        if(!userExists.length){
+        if (!userExists.length) {
           let db = await init();
           let result = await db
             .collection("users")
@@ -34,7 +34,7 @@ class User {
           // let newUser = new User(result);
           res(result);
         } else {
-          rej('Username taken')
+          rej("Username taken");
         }
       } catch (err) {
         rej(`Error creating user: ${err}`);
