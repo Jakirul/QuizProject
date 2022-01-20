@@ -66,7 +66,7 @@ function QuizResults() {
         <h1 role="header">Games Scores:</h1>
         {playerResults}
 
-        <button onClick={() => navigate("/Leaderboard")}>
+        <button id="go-lrboard" onClick={() => navigate("/Leaderboard")}>
           Go to the Leaderboard
         </button>
 
