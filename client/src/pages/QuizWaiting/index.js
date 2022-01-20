@@ -185,7 +185,10 @@ function QuizWaiting() {
   return (
     <div role="waiting">
       <NavBar />
-
+      <p id="remember-msg">
+        Remember: if you're not logged in, your score won't be counted on the
+        leaderboard!
+      </p>
       <div className="QuizWaiting">
         {!result ? (
           <div>
@@ -243,18 +246,13 @@ function QuizWaiting() {
         )}
 
         <div>
+          <main id="message-list">{messageList}</main>
           <h3>Write a message...</h3>
-          <form onSubmit={sendMessage} role="sendMessage">
+          <form id="message-form" onSubmit={sendMessage} role="sendMessage">
             <input name="message" required minLength="1" maxLength="100" />
             <input type="submit" />
           </form>
-
-          <main>{messageList}</main>
         </div>
-      </div>
-      <div id="remember-msg">
-        Remember: if you're not logged in, your score won't be counted on the
-        leaderboard!
       </div>
     </div>
   );

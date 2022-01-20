@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Login, Register, NavBar } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import "./log.css";
 function LoginRegister() {
   const [showRegisterForm, setRegisterForm] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -22,6 +22,7 @@ function LoginRegister() {
           <>
             <Login />
             <button
+              id="got-account"
               onClick={() =>
                 setRegisterForm((showRegisterForm) => !showRegisterForm)
               }
