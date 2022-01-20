@@ -8,19 +8,19 @@ import "./log.css";
 function LoginRegister() {
   const [showRegisterForm, setRegisterForm] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const error = useSelector(state => state.auth.error)
+  const error = useSelector((state) => state.auth.error);
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState()
-  const dispatch = useDispatch()
+  const [errorMessage, setErrorMessage] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(resetError())
-  }, [])
+    dispatch(resetError());
+  }, []);
 
   useEffect(() => {
-    console.log(error)
-    setErrorMessage(error)
-  }, [error])
+    console.log(error);
+    setErrorMessage(error);
+  }, [error]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -39,17 +39,17 @@ function LoginRegister() {
               id="got-account"
               onClick={() => {
                 setRegisterForm((showRegisterForm) => !showRegisterForm);
-                dispatch(resetError())
-              }
-              }
-
+                dispatch(resetError());
+              }}
               role="btn"
             >
               Haven't got an account?
             </button>
           </>
         )}
-        {showRegisterForm && <Register error={errorMessage} setError={setErrorMessage} />}
+        {showRegisterForm && (
+          <Register error={errorMessage} setError={setErrorMessage} />
+        )}
       </div>
     </>
   );
