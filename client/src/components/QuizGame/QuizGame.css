@@ -1,7 +1,27 @@
 .ready-player {
-    color: green;
+  color: green;
 }
 
 .unready-player {
-    color: red;
+  color: red;
+}
+
+.quiz-game-wrap {
+  background-color: rgb(236, 236, 236);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-color: black;
+  border: solid 0.5px lightgrey;
+  border-radius: 10px;
+  padding: 20px;
+  padding: 100px 50px;
+  margin: 15px;
+}
+
+#go-lrboard {
+  background-color: 1px solid #64d46e;
+  border-radius: 10px;
+  background-color: #64d46e;
+  box-shadow: #29572d 0px 5px;
 }

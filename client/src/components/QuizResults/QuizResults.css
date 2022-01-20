@@ -3,5 +3,22 @@
 }
 
 .results-section {
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-color: black;
+  padding: 20px;
+  background-color: rgb(236, 236, 236);
+  border: solid 0.5px lightgrey;
+  border-radius: 10px;
+  padding: 160px 50px;
+  margin: 15px;
+  margin-top: 50px;
+}
+
+#go-lrboard {
+  background-color: 1px solid #64d46e;
+  border-radius: 10px;
+  background-color: #64d46e;
+  box-shadow: #29572d 0px 5px;
 }
