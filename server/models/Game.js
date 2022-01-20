@@ -22,7 +22,6 @@ class Game {
   }
 
   static scoreAdder(username, userScore) {
-    console.log("USERNAME = ", username, userScore)
     return new Promise(async (resolve, reject) => {
       try {
         let db = await init();
@@ -71,8 +70,9 @@ class Game {
           playerAns: body.answers[index],
         }));
 
-        const difficulty = answerResults[0].difficulty
-        let difficultyPoints
+        const difficulty = answersResults[0].difficulty
+        let difficultyPoints;
+
         if(difficulty==='hard'){
           difficultyPoints=4
         } else if (difficulty==='medium'){
@@ -87,11 +87,6 @@ class Game {
        
 
         // If a score is more than 0, then it will append it to the leaderboard
-        console.log(typeof(loggedIn))
-        console.log(loggedIn)
-        console.log()
-        console.log()
-        console.log()
         if (scoreKeeper > 0 && loggedIn === "true") {
           Game.scoreAdder(body.username, scoreKeeper);
         }
@@ -173,6 +168,7 @@ class Game {
         const newGame = await db
           .collection("games")
           .insertOne({ questions: questionList });
+        
         resolve(newGame.insertedId);
       } catch (err) {
         reject(`Cannot set a game: ${err.message}`);

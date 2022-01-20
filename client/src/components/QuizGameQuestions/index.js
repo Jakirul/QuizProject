@@ -11,15 +11,14 @@ function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption);
 
   const handleSubmit = () => {
-    dispatch(userAnswer(selectedOption));
     socketConnection.socketConnect.emit(
       "isReady",
       socketConnection.socketConnect.id
     );
     setDisabled(true);
+    dispatch(userAnswer(selectedOption));
     setSelectedOption(null);
     reset();
   };
@@ -42,12 +41,12 @@ function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
     );
   });
   return (
-    <div>
+    <div role="QuizGameQuestions">
       {/* <Timer handleSubmit={handleSubmit} /> */}
       {questionList}
       <div>
         {selectedOption && (
-          <button onClick={handleSubmit} disabled={disabled}>
+          <button onClick={handleSubmit} role="btn" disabled={disabled}>
             Submit
           </button>
         )}

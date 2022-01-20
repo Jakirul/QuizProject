@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Home,
   LeaderBoard,
@@ -13,10 +13,19 @@ import {
   QuizResults
 } from './components'
 import { Routes, Route } from "react-router-dom";
+import {useSelector} from 'react-redux'
 
 import './style.css'
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const currentUser = useSelector((state) => state.auth.currentUser.username)
+  
+  useEffect(() => {
+    if (!isLoggedIn) {
+      localStorage.clear()
+    }
+  }, [])
   return (
     <div>
       <Routes>

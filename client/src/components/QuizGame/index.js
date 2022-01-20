@@ -14,17 +14,15 @@ function QuizGame() {
   const dispatch = useDispatch();
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
-  console.log(lobbyPlayers);
   const questions = useSelector((state) => state.player.questions);
   const socketConnection = useSelector(
     (state) => state.player.socketConnection
   );
   const answers = useSelector((state) => state.player.answerList);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-    console.log("logged in inside quiz game", isLoggedIn)
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [disableQuestion, setDisableQuestion] = useState(false);
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(20);
   const [isActive, setIsActive] = useState(true);
 
   const resetTimer = () => {
@@ -49,7 +47,6 @@ function QuizGame() {
   }, []);
 
   useEffect(() => {
-    console.log("rerender");
     if (lobbyPlayers.length > 0) {
       if (lobbyPlayers.every((player) => player.userReady === true)) {
         if (currentQuestion < questions.length - 1) {
@@ -58,7 +55,7 @@ function QuizGame() {
             setDisableQuestion(false);
             setCurrentQuestion(currentQuestion + 1);
             resetTimer();
-            setTime(10);
+            setTime(20);
             setIsActive(true);
             // socketConnection.socketConnect.emit('reset')
             // socketConnection.socketConnect.emit('timer')
@@ -89,7 +86,7 @@ function QuizGame() {
             options
           );
 
-          setTimeout(() => navigate(`/results/${id}`), 2000);
+          setTimeout(() => navigate(`/results/${id}`, { replace: true }), 2000);
           dispatch(unreadyPlayers());
         }
       }
@@ -120,7 +117,7 @@ function QuizGame() {
   };
 
   return (
-    <div>
+    <div role="quiz">
       <button onClick={exitQuiz}>Exit Quiz</button>
       <p>timer: {time}</p>
       {questions ? (
@@ -161,6 +158,5 @@ function QuizGame() {
     </div>
   );
 }
-
 
 export default QuizGame;

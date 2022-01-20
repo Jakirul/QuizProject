@@ -3,13 +3,17 @@ import React from "react";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store/store.js";
+import { store, persistor } from "./redux/store/store.js";
+// import store from "./redux/store/store.js";
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.querySelector("#root")
 );

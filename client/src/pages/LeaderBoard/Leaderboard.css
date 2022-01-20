@@ -1,6 +1,8 @@
 .Leaderboard > * {
     text-align: center;
     border: none;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+
 }
 
 .Leaderboard > .leaderboard-score {

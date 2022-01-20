@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import store from "../../redux/store/store";
 import { useSelector } from "react-redux";
+import "./QuizResults.css";
 
 function QuizResults() {
   const [results, setResults] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log("is logged in", isLoggedIn)
   const currentUser = useSelector((state) => state.auth.currentUser);
 
   async function fetchResults() {
@@ -54,13 +54,19 @@ function QuizResults() {
   }, []);
 
   return (
-    <div>
-      <h1>Games Scores:</h1>
+    <div role="score">
+      <button onClick={() => navigate("/", { replace: true })}>Home </button>
+      <h1 role="header">Games Scores:</h1>
       {playerResults}
 
       <button onClick={() => navigate("/Leaderboard")}>
         Go to the Leaderboard
       </button>
+
+      <div id="remember-msg">
+        Remember: if you're not logged in, your score won't be counted on the
+        leaderboard!
+      </div>
     </div>
   );
 }

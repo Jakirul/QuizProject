@@ -24,9 +24,14 @@ function QuizWaiting() {
   const [nickname, setNickname] = useState("");
   const [result, setResult] = useState();
   const [message, setMessage] = useState([]);
+  const [copiedURL, setCopiedURL] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
 
   const lobbyPlayers = useSelector((state) => state.player.playerList);
-  const socketConnection = useSelector((state) => state.player.socketConnection);
+  const socketConnection = useSelector(
+    (state) => state.player.socketConnection
+  );
+  const username = useSelector((state) => state.auth.currentUser.username);
 
   useEffect(() => {
     dispatch(socketConnections({ socketConnect }));
@@ -45,17 +50,20 @@ function QuizWaiting() {
     e.preventDefault();
     let message = e.target.message.value;
     socketConnection.socketConnect.emit("message", { nickname, message });
+    setMessage((prevState) => [
+      ...prevState,
+      { nickname: nickname, message: message, me: true },
+    ]);
+
+    e.target.message.value = "";
   };
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1000);
     if (socketConnection !== undefined) {
-      if (localStorage.getItem("username")) {
-        socketConnection.socketConnect.emit(
-          "username",
-          localStorage.getItem("username")
-        );
-        setNickname(localStorage.getItem("username"));
+      if (username) {
+        socketConnection.socketConnect.emit("username", username);
+        setNickname(username);
       } else {
         socketConnection.socketConnect.emit(
           "username",
@@ -74,7 +82,6 @@ function QuizWaiting() {
         }
       );
     }
-
   }, [socketConnection]);
 
   useEffect(() => {
@@ -87,23 +94,20 @@ function QuizWaiting() {
     }
   }, [lobbyPlayers]);
 
-  
   const editUsername = async (e) => {
-    const username = await fetch(`http://localhost:3001/user/${nickname}`)
+    const username = await fetch(`http://localhost:3001/user/${nickname}`);
     const data = await username.json();
 
     function userExists(username) {
-        return lobbyPlayers.some(function(el) {
-            return el.player.username === username;
-        }); 
+      return lobbyPlayers.some(function (el) {
+        return el.player.username === username;
+      });
     }
 
-    if (data.status === false || userExists(nickname)) return
- 
+    if (data.status === false || userExists(nickname)) return;
+
     socketConnection.socketConnect.emit("username", nickname);
-
   };
-
 
   function togglereadyPlayers() {
     socketConnection.socketConnect.emit(
@@ -123,9 +127,18 @@ function QuizWaiting() {
     }
     return (
       <div key={i}>
-        <p>
-          <b>{p.player.username}</b> {ready}
-        </p>
+        {/* <p>{p.player.username}{ready}</p> */}
+        {nickname === p.player.username ? (
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            {p.player.username}
+            {ready}
+          </p>
+        ) : (
+          <p>
+            {p.player.username}
+            {ready}
+          </p>
+        )}
       </div>
     );
   });
@@ -147,10 +160,22 @@ function QuizWaiting() {
     })();
   }, [id]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setCopiedURL(false);
+    }, 3000);
+  }, [copiedURL]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCopiedCode(false);
+    }, 3000);
+  }, [copiedCode]);
+
   const messageList = message.map((message, i) => {
     return (
       <div key={i}>
-        <li>
+        <li className={message.me ? "my-message" : ""}>
           <b>{message.nickname}</b>: {message.message}
         </li>
       </div>
@@ -158,7 +183,7 @@ function QuizWaiting() {
   });
 
   return (
-    <div>
+    <div role="waiting">
       <NavBar />
 
       <div className="QuizWaiting">
@@ -174,27 +199,33 @@ function QuizWaiting() {
                 navigator.clipboard.writeText(
                   `http://localhost:3000/room/${id}`
                 );
+                setCopiedURL(true);
               }}
             >
               Copy URL
             </button>
+            {copiedURL && <div>URL copied to clipboard!</div>}
             <button
               onClick={() => {
                 navigator.clipboard.writeText(`${id}`);
+                setCopiedCode(true);
               }}
             >
               Copy Code
             </button>
-
-            {!localStorage.getItem("token") ? (
+            {copiedCode && <div>Code copied to clipboard!</div>}
+            {!username ? (
               <div>
                 <input
                   type="text"
                   onChange={(e) => setNickname(e.target.value)}
                   className="nickname"
+                  maxLength="15"
                   required
                 />
-                <button onClick={editUsername}>Change Username</button>
+                <button onClick={editUsername} role="editUsername">
+                  Change Username
+                </button>
               </div>
             ) : null}
 
@@ -213,13 +244,17 @@ function QuizWaiting() {
 
         <div>
           <h3>Write a message...</h3>
-          <form onSubmit={sendMessage}>
-            <input name="message" required />
+          <form onSubmit={sendMessage} role="sendMessage">
+            <input name="message" required minLength="1" maxLength="100" />
             <input type="submit" />
           </form>
 
           <main>{messageList}</main>
         </div>
+      </div>
+      <div id="remember-msg">
+        Remember: if you're not logged in, your score won't be counted on the
+        leaderboard!
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ function Login() {
     );
   };
   return (
-    <form id="login-form" onSubmit={handleSubmit}>
+    <form id="login-form" role="login" onSubmit={handleSubmit}>
       <div>
         <label>Username</label>
         <input

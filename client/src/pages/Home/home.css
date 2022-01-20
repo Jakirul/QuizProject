@@ -1,12 +1,8 @@
 * {
   box-sizing: border-box;
-  /* background-color: aquamarine; */
-  
 }
 .home {
-  /* background-color: red; */
-  
-background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 .button {
   padding: 50px;
@@ -19,8 +15,7 @@ background-image: url("https://www.transparenttextures.com/patterns/arabesque.pn
   box-shadow: 5px 5px #888888;
   cursor: pointer;
   font-size: 20px;
-  font-family: 'Lilita One', cursive;
-  
+  font-family: "Lilita One", cursive;
 }
 
 .button-stack {
@@ -38,11 +33,12 @@ background-image: url("https://www.transparenttextures.com/patterns/arabesque.pn
 
 #welcome {
   text-align: center;
-  font-family: 'Lilita One', cursive;
   margin-top: 40px;
   background-color: rgb(68, 184, 68);
+
   color: black;
-  font-size: 40px;
-  padding: 20px;
+  font-size: 30px;
+  padding: 15px;
   border-radius: 10px;
+  font-family: "Lilita One", cursive;
 }
