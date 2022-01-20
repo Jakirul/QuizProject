@@ -41,12 +41,17 @@ function QuizGameQuestions({ options, disabled, setDisabled, timer, reset }) {
     );
   });
   return (
-    <div role="QuizGameQuestions">
+    <div className="question-wrapper" role="QuizGameQuestions">
       {/* <Timer handleSubmit={handleSubmit} /> */}
       {questionList}
       <div>
         {selectedOption && (
-          <button onClick={handleSubmit} role="btn" disabled={disabled}>
+          <button
+            id="submit-btn"
+            onClick={handleSubmit}
+            role="btn"
+            disabled={disabled}
+          >
             Submit
           </button>
         )}
